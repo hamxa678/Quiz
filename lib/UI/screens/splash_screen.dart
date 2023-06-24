@@ -91,7 +91,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (_FirebaseAuthService.isLogin) {
       Get.off(() => const RootScreen());
     } else {
-      Get.off(() => LoginScreen());
+      Get.off(() => const LoginScreen());
     }
   }
 
@@ -123,14 +123,24 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     /// Splash Screen UI goes here.
     return Scaffold(
-      backgroundColor: scaffoldBackgroundColor,
-      body: Center(
-          child: Image.asset(
-        '${staticImage}logo.png',
-        height: 100.h,
-        width: 100.w,
-        fit: BoxFit.scaleDown,
-      )),
-    );
+        backgroundColor: scaffoldBackgroundColor,
+        body: Stack(
+          children: [
+            Image.asset(
+              '${staticImage}Background.png',
+              height: double.infinity,
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
+            Center(
+              child: SvgPicture.asset(
+                '${staticIcon}logo.svg',
+                height: 75.h,
+                width: 165.42.w,
+                fit: BoxFit.scaleDown,
+              ),
+            )
+          ],
+        ));
   }
 }

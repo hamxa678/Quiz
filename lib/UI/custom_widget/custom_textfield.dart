@@ -57,23 +57,23 @@ class CustomTextField extends StatelessWidget {
         controller: controller,
         style: TextStyle(
           fontSize: 15.sp,
-          color: const Color(0xff0D0F23),
+          color: const Color(0xffD9D9D9),
         ),
         decoration: InputDecoration(
           counterText: counterText,
           suffixIcon: suffixIcon,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(60.r),
-            borderSide: const BorderSide(color: Color(0xff707070)),
+            borderRadius: BorderRadius.circular(16.r),
+            borderSide: const BorderSide(color: Color(0xffD9D9D9)),
           ),
 
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(60.r),
-            borderSide: const BorderSide(color: Color(0xff707070)),
+            borderRadius: BorderRadius.circular(16.r),
+            borderSide: const BorderSide(color: Color(0xffD9D9D9)),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(60.r),
-            borderSide: const BorderSide(color: Color(0xff707070)),
+            borderRadius: BorderRadius.circular(16.r),
+            borderSide: const BorderSide(color: Color(0xffD9D9D9)),
           ),
           contentPadding:
               EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
@@ -88,7 +88,7 @@ class CustomTextField extends StatelessWidget {
             fontFamily: 'Poppins',
             fontWeight: FontWeight.w400,
             fontSize: 15.sp,
-            color: const Color(0xffA0A1B4),
+            color: const Color(0xffD9D9D9),
           ),
           // prefixIcon: prefexIcon,
           // suffixIcon: suffexIcon,

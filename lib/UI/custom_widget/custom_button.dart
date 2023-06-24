@@ -20,9 +20,9 @@ class CustomButton extends StatelessWidget {
           height: 60.h,
           width: width,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(60.r),
-              gradient: const LinearGradient(
-                  colors: [Color(0xff174096), Color(0xff2C9E9E)])),
+            borderRadius: BorderRadius.circular(16.r),
+            color: const Color(0xffD9D9D9),
+          ),
           child: Center(child: titleWidget)),
     );
   }
