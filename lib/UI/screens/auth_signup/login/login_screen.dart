@@ -105,7 +105,7 @@ class LoginScreen extends StatelessWidget {
                               ),
                         onPressed: () {
                           if (model.formKey.currentState!.validate()) {
-                            // do something
+                            model.loginWithEmailAndPassword();
                           }
                         },
                       ),
