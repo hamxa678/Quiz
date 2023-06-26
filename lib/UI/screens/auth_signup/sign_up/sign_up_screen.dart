@@ -11,6 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_svg/svg.dart';
 
 class SignUpScreen extends StatelessWidget {
   final User? user;
@@ -24,12 +25,25 @@ class SignUpScreen extends StatelessWidget {
           backgroundColor: Colors.white,
           body: SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.fromLTRB(25.w, 65.h, 25.w, 25.h),
+              padding: EdgeInsets.fromLTRB(25.w, 65.h, 25.w, 0),
               child: Form(
                 key: model.formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    SvgPicture.asset(
+                      '${staticIcon}logo1.svg',
+                      fit: BoxFit.scaleDown,
+                    ),
+                    42.verticalSpace,
+                    Text(
+                      'Login to your account',
+                      style: TextStyle(
+                        fontSize: 36.sp,
+                        color: Colors.white,
+                      ),
+                    ),
+                    37.verticalSpace,
                     Image.asset(
                       '${staticImage}logo.png',
                       cacheHeight: 449,
