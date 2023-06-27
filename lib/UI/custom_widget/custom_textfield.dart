@@ -76,7 +76,7 @@ class CustomTextField extends StatelessWidget {
             borderSide: const BorderSide(color: Color(0xffD9D9D9)),
           ),
           contentPadding:
-              EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+              EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
           hintText: hintText,
           errorStyle: TextStyle(
             fontFamily: 'Poppins',
