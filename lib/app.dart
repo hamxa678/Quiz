@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mvvm_template/UI/screens/auth_signup/sign_up/sign_up_screen.dart';
 import 'package:flutter_mvvm_template/UI/screens/cart_screeb/cart_screen_view_model.dart';
 import 'package:flutter_mvvm_template/UI/screens/splash_screen.dart';
 import 'package:flutter_mvvm_template/core/services/localization_service.dart';
@@ -25,11 +26,12 @@ class MyApp extends StatelessWidget {
       child: ScreenUtilInit(
         designSize: const Size(_designWidth, _designHeight),
         builder: (context, widget) => GetMaterialApp(
-          translations: LocalizationService(),
-          locale: const Locale("en"),
-          title: title,
-          home: const SplashScreen(),
-        ),
+            translations: LocalizationService(),
+            locale: const Locale("en"),
+            title: title,
+            home: const SignUpScreen()
+            // const SplashScreen(),
+            ),
       ),
     );
   }
