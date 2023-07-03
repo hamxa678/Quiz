@@ -18,21 +18,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /// Initialize the screen util, this will make your UI responsive.
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<CartScreenViewModel>(
-            create: (context) => CartScreenViewModel()),
-      ],
-      child: ScreenUtilInit(
-        designSize: const Size(_designWidth, _designHeight),
-        builder: (context, widget) => GetMaterialApp(
-            translations: LocalizationService(),
-            locale: const Locale("en"),
-            title: title,
-            home: const SignUpScreen()
-            // const SplashScreen(),
-            ),
-      ),
+    return ScreenUtilInit(
+      designSize: const Size(_designWidth, _designHeight),
+      builder: (context, widget) => GetMaterialApp(
+          translations: LocalizationService(),
+          locale: const Locale("en"),
+          title: title,
+          home: const SignUpScreen()
+          // const SplashScreen(),
+          ),
     );
   }
 }
