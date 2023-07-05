@@ -12,12 +12,7 @@ import 'package:intl/intl.dart';
 import '../../../../locator.dart';
 
 class SignUpViewModel extends BaseViewModel {
-  SignUpViewModel(User? user) {
-    print(user?.phoneNumber);
-    nameController.text = user?.displayName ?? "";
-    emailController.text = user?.email ?? "";
-    phoneNoController.text = user?.phoneNumber ?? "";
-  }
+  SignUpViewModel() {}
 
   /// Below line is used to get instance of our firebase auth service and file picker.
   final _firebaseAuthService = locator<FirebaseAuthService>();
@@ -78,29 +73,11 @@ class SignUpViewModel extends BaseViewModel {
   }
 
   /// below function is used to request for sign up
-  signUp(isSocialAuth) async {
-    print("sign up called");
-    signUpBody.name = nameController.text;
-    signUpBody.email = emailController.text;
-    signUpBody.password = passwordController.text;
-    signUpBody.location = locationController.text;
-    signUpBody.dob = dobController.text;
-    signUpBody.gender = gender;
-    signUpBody.phone = phoneNoController.text;
-
-    // isUserAlreadyExist(signUpBody);
-
+  signUp() async {
     setState(ViewState.busy);
-
     bool response;
-
-    if (isSocialAuth) {
-      response = await _firebaseAuthService.addUserDetail(signUpBody);
-    } else {
-      response =
-          await _firebaseAuthService.signupWithEmailAndPassword(signUpBody);
-    }
-
+    response =
+        await _firebaseAuthService.signupWithEmailAndPassword(signUpBody);
     if (response) {
       Get.offAll(const RootScreen());
     }

@@ -14,12 +14,11 @@ import 'package:provider/provider.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SignUpScreen extends StatelessWidget {
-  final User? user;
-  const SignUpScreen({Key? key, this.user}) : super(key: key);
+  const SignUpScreen({Key? key, }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => SignUpViewModel(user),
+      create: (context) => SignUpViewModel(),
       child: Consumer<SignUpViewModel>(
         builder: (context, model, child) => Scaffold(
           backgroundColor: Colors.white,
@@ -53,9 +52,6 @@ class SignUpScreen extends StatelessWidget {
                       fit: BoxFit.scaleDown,
                     ),
                     SizedBox(height: 50.h),
-                    Text((user == null) ? 'Sign Up' : 'Add Details',
-                        style: TextStyle(
-                            fontSize: 35.sp, color: const Color(0xff2441A3))),
                     SizedBox(height: 30.h),
                     CustomTextField(
                       validator: (input) =>
@@ -65,25 +61,7 @@ class SignUpScreen extends StatelessWidget {
                       controller: model.emailController,
                     ),
                     SizedBox(height: 20.h),
-                    if (user == null)
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 20.h),
-                        child: CustomTextField(
-                          validator: (input) => input!.isValidPassword()
-                              ? null
-                              : "Must contain 8 (lower, upper case, digit, and special charachter) characters",
-                          suffixIcon: GestureDetector(
-                              onTap: () {
-                                model.togglePasswordVisibility();
-                              },
-                              child: (model.isPasswordVisible)
-                                  ? const Icon(Icons.visibility_off)
-                                  : const Icon(Icons.visibility)),
-                          obscureText: !model.isPasswordVisible,
-                          hintText: 'Password',
-                          controller: model.passwordController,
-                        ),
-                      ),
+                   
                     CustomTextField(
                       validator: (input) =>
                           input!.isValidUserName() ? null : "Invalid Name",
@@ -141,7 +119,7 @@ class SignUpScreen extends StatelessWidget {
                     CustomButton(
                       titleWidget: !(model.state == ViewState.busy)
                           ? Text(
-                              (user == null) ? 'Sign Up' : 'Add Details',
+                              'Sign Up' ,
                               style: TextStyle(
                                   fontSize: 20.sp, color: Colors.white),
                             )
@@ -150,12 +128,12 @@ class SignUpScreen extends StatelessWidget {
                       onPressed: () async {
                         if (model.formKey.currentState!.validate()) {
                           // await model.login();
-                          await model.signUp(user != null);
+                          await model.signUp();
                         }
                       },
                     ),
                     SizedBox(height: 20.h),
-                    if (user == null) _alreadyHaveAccount()
+                    _alreadyHaveAccount()
                   ],
                 ),
               ),

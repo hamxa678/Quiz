@@ -48,7 +48,7 @@ class LoginViewModel extends BaseViewModel {
     if (user != null) {
       (routeToRoot)
           ? Get.offAll(const RootScreen())
-          : Get.to(SignUpScreen(user: user));
+          : Get.to(const SignUpScreen());
     }
   }
 

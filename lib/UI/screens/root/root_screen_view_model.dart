@@ -8,10 +8,10 @@ import 'package:flutter_mvvm_template/core/services/firebase_auth_service.dart';
 import 'package:flutter_mvvm_template/locator.dart';
 import 'package:get/get.dart';
 
-import '../cart_screeb/cart_screen_view_model.dart';
+// import '../cart_screeb/cart_screen_view_model.dart';
 
 class RootScreenViewModel extends BaseViewModel {
-  late CartScreenViewModel cartmodel;
+  // late CartScreenViewModel cartmodel;
   FirebaseAuthService firebaseAuthService = locator<FirebaseAuthService>();
   RootScreenViewModel() {
     // Timer.periodic(const Duration(milliseconds: 100), (timer) {
@@ -21,14 +21,14 @@ class RootScreenViewModel extends BaseViewModel {
   }
 
   add() {
-    cartmodel.todosCount++;
+    // cartmodel.todosCount++;
     notifyListeners();
   }
 
-  void update(CartScreenViewModel myModel) {
-    cartmodel = myModel;
-    notifyListeners();
-  }
+  // void update(CartScreenViewModel myModel) {
+  //   cartmodel = myModel;
+  //   notifyListeners();
+  // }
 
   List<Widget> allScreen = [
     // AppDrawer(child: DashboardScreen()),

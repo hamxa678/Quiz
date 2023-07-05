@@ -7,7 +7,7 @@ class CustomTextField extends StatelessWidget {
       this.obscureText = false,
       this.controller,
       required this.hintText,
-      // this.prefexIcon,
+      this.prefexIcon,
       // this.suffexIcon,
       this.onTap,
       this.enable = true,
@@ -15,7 +15,6 @@ class CustomTextField extends StatelessWidget {
       // this.hintStyle,
       this.onSaved,
       this.validator,
-      this.height = 113,
       this.readOnly = false,
       this.keyboardtype,
       this.suffixIcon,
@@ -25,13 +24,12 @@ class CustomTextField extends StatelessWidget {
   final bool obscureText;
   final TextEditingController? controller;
   final String hintText;
-  // final Widget? prefexIcon;
+  final Widget? prefexIcon;
   // final Widget? suffexIcon;
   final VoidCallback? onTap;
   TextInputType? keyboardtype;
   final bool enable;
   final double? width;
-  double height;
   final int? maxLength;
   bool readOnly;
   Widget? suffixIcon;
@@ -62,35 +60,35 @@ class CustomTextField extends StatelessWidget {
         decoration: InputDecoration(
           counterText: counterText,
           suffixIcon: suffixIcon,
+          prefixIcon: prefexIcon,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16.r),
+            borderRadius: BorderRadius.circular(6.r),
             borderSide: const BorderSide(color: Color(0xffD9D9D9)),
           ),
 
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16.r),
+            borderRadius: BorderRadius.circular(6.r),
             borderSide: const BorderSide(color: Color(0xffD9D9D9)),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16.r),
+            borderRadius: BorderRadius.circular(6.r),
             borderSide: const BorderSide(color: Color(0xffD9D9D9)),
           ),
           contentPadding:
-              EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+              EdgeInsets.symmetric(horizontal: 15.w, vertical: 16.h),
           hintText: hintText,
-          errorStyle: TextStyle(
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.w400,
-            fontSize: 8.sp,
-            color: const Color(0xffFF0000),
-          ),
+          // errorStyle: TextStyle(
+          //   fontFamily: 'Poppins',
+          //   fontWeight: FontWeight.w400,
+          //   fontSize: 8.sp,
+          //   color: const Color(0xffFF0000),
+          // ),
           hintStyle: TextStyle(
             fontFamily: 'Poppins',
             fontWeight: FontWeight.w400,
             fontSize: 15.sp,
             color: const Color(0xffD9D9D9),
           ),
-          // prefixIcon: prefexIcon,
           // suffixIcon: suffexIcon,
         ),
       ),

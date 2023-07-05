@@ -45,12 +45,20 @@ class LoginScreen extends StatelessWidget {
                       Text(
                         'Login to your account',
                         style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
                           fontSize: 36.sp,
                           color: Colors.white,
                         ),
                       ),
                       37.verticalSpace,
                       CustomTextField(
+                        prefexIcon: SvgPicture.asset(
+                          height: 20.h,
+                          width: 13.96.w,
+                          '${staticIcon}email.svg',
+                          fit: BoxFit.scaleDown,
+                        ),
                         hintText: 'Email',
                         controller: model.emailController,
                         validator: (value) {
@@ -64,9 +72,29 @@ class LoginScreen extends StatelessWidget {
                       ),
                       20.verticalSpace,
                       CustomTextField(
+                        prefexIcon: SvgPicture.asset(
+                          height: 20.h,
+                          width: 13.96.w,
+                          '${staticIcon}password.svg',
+                          fit: BoxFit.scaleDown,
+                        ),
+                        suffixIcon: GestureDetector(
+                          onTap: () {
+                            model.togglePasswordVisibility();
+                          },
+                          child: model.isPasswordVisible
+                              ? SvgPicture.asset(
+                                  '${staticIcon}eye.svg',
+                                  fit: BoxFit.scaleDown,
+                                  color: const Color(0xffD9D9D9),
+                                )
+                              : SvgPicture.asset('${staticIcon}eye-off.svg',
+                                  fit: BoxFit.scaleDown,
+                                  color: const Color(0xffD9D9D9)),
+                        ),
                         hintText: 'Password',
                         controller: model.passwordController,
-                        obscureText: true,
+                        obscureText: model.isPasswordVisible,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Password cannot be empty';
@@ -84,8 +112,9 @@ class LoginScreen extends StatelessWidget {
                           child: Text(
                             'Forgot Password?',
                             style: TextStyle(
-                              fontSize: 15.sp,
-                              color: Colors.white,
+                              fontFamily: 'Poppins',
+                              fontSize: 13.sp,
+                              color: const Color(0xffD9D9D9),
                             ),
                           ),
                         ),
@@ -100,6 +129,8 @@ class LoginScreen extends StatelessWidget {
                                 'Login',
                                 style: TextStyle(
                                   fontSize: 22.sp,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
                                   color: const Color(0xff4530B2),
                                 ),
                               ),
@@ -109,6 +140,8 @@ class LoginScreen extends StatelessWidget {
                           }
                         },
                       ),
+                      15.verticalSpace,
+                      _dontHaveAccount()
                     ],
                   ),
                 ),
@@ -116,6 +149,34 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  _dontHaveAccount() {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Text(
+            "Don't have an account? ",
+            style: TextStyle(color: Color(0xffD9D9D9), fontFamily: 'Poppins'),
+          ),
+          InkWell(
+            onTap: () {
+              Get.to(() => const SignUpScreen());
+            },
+            child: const Text(
+              'Signup',
+              style: TextStyle(
+                  color: Color(0xffD9D9D9),
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500),
+            ),
+          ),
+        ],
       ),
     );
   }
