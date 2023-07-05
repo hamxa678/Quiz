@@ -5,8 +5,12 @@ extension StringValidator on String {
         .hasMatch(this);
   }
 
-  bool isValidUserName() {
+  bool isValidFullName() {
     return RegExp(r"^[A-Z][a-zA-Z]+ [A-Z][a-zA-Z]+$").hasMatch(this);
+  }
+
+  bool isValidUserName() {
+    return RegExp(r"^[a-zA-Z0-9]+$").hasMatch(this);
   }
 
   bool isValidPassword() {

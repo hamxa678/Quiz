@@ -19,13 +19,10 @@ class SignUpViewModel extends BaseViewModel {
   final _imagePickerService = locator<FilePickerService>();
 
   /// SignUp screen textfield controller
-  TextEditingController nameController = TextEditingController();
+  TextEditingController fullNameController = TextEditingController();
+  TextEditingController userNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController locationController = TextEditingController();
-  TextEditingController dobController = TextEditingController();
-  TextEditingController genderController = TextEditingController();
-  TextEditingController phoneNoController = TextEditingController();
 
   /// current date time for date picker initial date
   DateTime selectedDate = DateTime.now();
@@ -40,7 +37,7 @@ class SignUpViewModel extends BaseViewModel {
   List<String> list = <String>['Male', 'Female', 'Other'];
 
   /// false for hiding password and true for showing password and false is default value
-  bool isPasswordVisible = false;
+  bool isPasswordVisible = true;
 
   /// default gender is Male
   String? gender = "Male";
@@ -58,19 +55,19 @@ class SignUpViewModel extends BaseViewModel {
   }
 
   /// below function is used to select the date
-  Future<void> selectDop(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-    );
+  // Future<void> selectDop(BuildContext context) async {
+  //   final DateTime? picked = await showDatePicker(
+  //     context: context,
+  //     initialDate: selectedDate,
+  //     firstDate: DateTime(1900),
+  //     lastDate: DateTime.now(),
+  //   );
 
-    if (picked != null && picked != selectedDate) {
-      selectedDate = picked;
-      dobController.text = DateFormat('dd-MM-yyyy').format(selectedDate);
-    }
-  }
+  //   if (picked != null && picked != selectedDate) {
+  //     selectedDate = picked;
+  //     // dobController.text = DateFormat('dd-MM-yyyy').format(selectedDate);
+  //   }
+  // }
 
   /// below function is used to request for sign up
   signUp() async {
@@ -101,10 +98,10 @@ class SignUpViewModel extends BaseViewModel {
   /// below function is used to dispose all the controllers
   @override
   void dispose() {
-    nameController.dispose();
+    fullNameController.dispose();
+    userNameController.dispose();
     emailController.dispose();
     passwordController.dispose();
-    locationController.dispose();
 
     super.dispose();
   }

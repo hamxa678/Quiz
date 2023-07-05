@@ -15,7 +15,7 @@ class LoginViewModel extends BaseViewModel {
   FirebaseAuthService firebaseAuthService = locator<FirebaseAuthService>();
   LoginBody loginBody = LoginBody();
   final formKey = GlobalKey<FormState>();
-  bool isPasswordVisible = false;
+  bool isPasswordVisible = true;
 
   /// skillsAndProjectsController screen textfield controller
   TextEditingController emailController = TextEditingController();
