@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm_template/UI/screens/auth_signup/sign_up/sign_up_screen.dart';
+import 'package:flutter_mvvm_template/UI/screens/select_avatar/select_avatar.dart';
 import 'package:flutter_mvvm_template/UI/screens/splash_screen.dart';
 import 'package:flutter_mvvm_template/core/services/localization_service.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,12 +21,13 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(_designWidth, _designHeight),
       builder: (context, widget) => GetMaterialApp(
-          translations: LocalizationService(),
-          locale: const Locale("en"),
-          title: title,
-          home: const SignUpScreen()
-          // const SplashScreen(),
-          ),
+        translations: LocalizationService(),
+        locale: const Locale("en"),
+        title: title,
+        home: const SelectAvatarScreen(),
+        // const SignUpScreen()
+        // const SplashScreen(),
+      ),
     );
   }
 }
