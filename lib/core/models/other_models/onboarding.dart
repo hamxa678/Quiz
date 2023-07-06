@@ -1,4 +1,4 @@
-import 'package:flutter_mvvm_template/core/services/localization_service.dart';
+import 'package:Quizz/core/services/localization_service.dart';
 
 class Onboarding {
   late String? imgUrl;
@@ -6,10 +6,10 @@ class Onboarding {
 
   Onboarding({this.imgUrl, this.title});
 
-    factory Onboarding.fromMap(map) {
+  factory Onboarding.fromMap(map) {
     return Onboarding(
-      imgUrl : map['image_url'],
-      title : map[LocalizationService.getLocalizedKey('title')],
+      imgUrl: map['image_url'],
+      title: map[LocalizationService.getLocalizedKey('title')],
     );
   }
 }

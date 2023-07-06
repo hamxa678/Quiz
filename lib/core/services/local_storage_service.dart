@@ -1,4 +1,4 @@
-import 'package:flutter_mvvm_template/core/others/logger_customizations/custom_logger.dart';
+import 'package:Quizz/core/others/logger_customizations/custom_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorageService {

@@ -1,4 +1,4 @@
-import 'package:flutter_mvvm_template/core/others/base_view_model.dart';
+import 'package:Quizz/core/others/base_view_model.dart';
 
 class HomeScreenViewModel extends BaseViewModel {
   int currentIndex = 0;

@@ -2,10 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 // import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_template/app.dart';
-import 'package:flutter_mvvm_template/core/others/logger_customizations/custom_logger.dart';
-import 'package:flutter_mvvm_template/firebase_options.dart';
-import 'package:flutter_mvvm_template/locator.dart';
+import 'package:Quizz/app.dart';
+import 'package:Quizz/core/others/logger_customizations/custom_logger.dart';
+import 'package:Quizz/firebase_options.dart';
+import 'package:Quizz/locator.dart';
 import 'core/enums/env.dart';
 
 Future<void> main() async {

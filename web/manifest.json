@@ -1,6 +1,6 @@
 {
-    "name": "flutter_mvvm_template",
-    "short_name": "flutter_mvvm_template",
+    "name": "Quizz",
+    "short_name": "Quizz",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

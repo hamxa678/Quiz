@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_mvvm_template/core/enums/view_state.dart';
+import 'package:Quizz/core/enums/view_state.dart';
 
 ///
 /// [BaseViewModel] is the base class with all

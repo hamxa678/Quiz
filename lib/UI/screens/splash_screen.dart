@@ -1,16 +1,16 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_template/UI/custom_widget/dialogbox/network_error_dialog.dart';
-import 'package:flutter_mvvm_template/UI/screens/auth_signup/login/login_screen.dart';
-import 'package:flutter_mvvm_template/UI/screens/onboarding/onboarding_screen.dart';
-import 'package:flutter_mvvm_template/UI/screens/root/root_screen.dart';
-import 'package:flutter_mvvm_template/core/constants/colors.dart';
-import 'package:flutter_mvvm_template/core/constants/strings.dart';
-import 'package:flutter_mvvm_template/core/models/other_models/onboarding.dart';
-import 'package:flutter_mvvm_template/core/others/logger_customizations/custom_logger.dart';
-import 'package:flutter_mvvm_template/core/services/firebase_auth_service.dart';
-import 'package:flutter_mvvm_template/core/services/local_storage_service.dart';
-import 'package:flutter_mvvm_template/core/services/notifications_service.dart';
+import 'package:Quizz/UI/custom_widget/dialogbox/network_error_dialog.dart';
+import 'package:Quizz/UI/screens/auth_signup/login/login_screen.dart';
+import 'package:Quizz/UI/screens/onboarding/onboarding_screen.dart';
+import 'package:Quizz/UI/screens/root/root_screen.dart';
+import 'package:Quizz/core/constants/colors.dart';
+import 'package:Quizz/core/constants/strings.dart';
+import 'package:Quizz/core/models/other_models/onboarding.dart';
+import 'package:Quizz/core/others/logger_customizations/custom_logger.dart';
+import 'package:Quizz/core/services/firebase_auth_service.dart';
+import 'package:Quizz/core/services/local_storage_service.dart';
+import 'package:Quizz/core/services/notifications_service.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

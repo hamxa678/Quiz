@@ -1,4 +1,4 @@
-import 'package:flutter_mvvm_template/core/config/config.dart';
+import 'package:Quizz/core/config/config.dart';
 import 'package:get_it/get_it.dart';
 
 import 'core/enums/env.dart';

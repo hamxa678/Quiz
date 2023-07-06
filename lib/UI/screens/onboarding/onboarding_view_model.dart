@@ -1,6 +1,5 @@
-
-import 'package:flutter_mvvm_template/core/models/other_models/onboarding.dart';
-import 'package:flutter_mvvm_template/core/services/local_storage_service.dart';
+import 'package:Quizz/core/models/other_models/onboarding.dart';
+import 'package:Quizz/core/services/local_storage_service.dart';
 import 'package:logger/logger.dart';
 import '../../../core/others/base_view_model.dart';
 import '../../../locator.dart';

@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_template/UI/screens/auth_signup/login/login_screen.dart';
-import 'package:flutter_mvvm_template/core/enums/view_state.dart';
-import 'package:flutter_mvvm_template/core/others/base_view_model.dart';
-import 'package:flutter_mvvm_template/core/services/firebase_auth_service.dart';
-import 'package:flutter_mvvm_template/locator.dart';
+import 'package:Quizz/UI/screens/auth_signup/login/login_screen.dart';
+import 'package:Quizz/core/enums/view_state.dart';
+import 'package:Quizz/core/others/base_view_model.dart';
+import 'package:Quizz/core/services/firebase_auth_service.dart';
+import 'package:Quizz/locator.dart';
 import 'package:get/get.dart';
 
 // import '../cart_screeb/cart_screen_view_model.dart';

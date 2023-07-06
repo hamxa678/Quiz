@@ -1,4 +1,4 @@
-import 'package:flutter_mvvm_template/core/enums/env.dart';
+import 'package:Quizz/core/enums/env.dart';
 
 class Config {
   final Env _env;
