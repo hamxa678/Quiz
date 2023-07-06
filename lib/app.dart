@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm_template/UI/screens/auth_signup/sign_up/sign_up_screen.dart';
-import 'package:flutter_mvvm_template/UI/screens/select_avatar/select_avatar.dart';
+import 'package:flutter_mvvm_template/UI/screens/select_upload_avatar/select_avatar.dart';
+import 'package:flutter_mvvm_template/UI/screens/select_upload_avatar/upload_avatar.dart';
 import 'package:flutter_mvvm_template/UI/screens/splash_screen.dart';
 import 'package:flutter_mvvm_template/core/services/localization_service.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         translations: LocalizationService(),
         locale: const Locale("en"),
         title: title,
-        home: const SelectAvatarScreen(),
+        home: const UploadAvatarScreen(),
         // const SignUpScreen()
         // const SplashScreen(),
       ),
