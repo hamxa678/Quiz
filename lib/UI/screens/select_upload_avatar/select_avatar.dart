@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm_template/UI/custom_widget/custom_button.dart';
-import 'package:flutter_mvvm_template/UI/screens/auth_signup/sign_up/sign_up_screen.dart';
-import 'package:flutter_mvvm_template/UI/screens/select_avatar/select_avatar_viewmodel.dart';
+import 'package:flutter_mvvm_template/UI/screens/select_upload_avatar/select_avatar_viewmodel.dart';
 import 'package:flutter_mvvm_template/core/constants/strings.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -133,34 +132,6 @@ class SelectAvatarScreen extends StatelessWidget {
           SvgPicture.asset(
             '${staticIcon}skip.svg',
             fit: BoxFit.scaleDown,
-          ),
-        ],
-      ),
-    );
-  }
-
-  _dontHaveAccount() {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const Text(
-            "Don't have an account? ",
-            style: TextStyle(color: Color(0xffD9D9D9), fontFamily: 'Poppins'),
-          ),
-          InkWell(
-            onTap: () {
-              Get.to(() => const SignUpScreen());
-            },
-            child: const Text(
-              'Signup',
-              style: TextStyle(
-                  color: Color(0xffD9D9D9),
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w500),
-            ),
           ),
         ],
       ),
