@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_mvvm_template/core/models/body/login_body.dart';
-import 'package:flutter_mvvm_template/core/models/body/reset_password_body.dart';
-import 'package:flutter_mvvm_template/core/models/body/signup_body.dart';
-import 'package:flutter_mvvm_template/core/models/other_models/onboarding.dart';
-import 'package:flutter_mvvm_template/core/models/other_models/user_profile.dart';
-import 'package:flutter_mvvm_template/core/models/responses/base_responses/base_response.dart';
+import 'package:Quizz/core/models/body/login_body.dart';
+import 'package:Quizz/core/models/body/reset_password_body.dart';
+import 'package:Quizz/core/models/body/signup_body.dart';
+import 'package:Quizz/core/models/other_models/onboarding.dart';
+import 'package:Quizz/core/models/other_models/user_profile.dart';
+import 'package:Quizz/core/models/responses/base_responses/base_response.dart';
 
 class FirebaseService {
   final FirebaseAuth _auth = FirebaseAuth.instance;

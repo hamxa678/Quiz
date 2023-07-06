@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_template/UI/screens/home/home_screen_viewmodel.dart';
-import 'package:flutter_mvvm_template/core/constants/strings.dart';
+import 'package:Quizz/UI/screens/home/home_screen_viewmodel.dart';
+import 'package:Quizz/core/constants/strings.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

@@ -45,7 +45,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:646748873521:android:e6bcf44ba0e1f524198610",
         "android_client_info": {
-          "package_name": "com.example.flutter_mvvm_template"
+          "package_name": "com.example.Quizz"
         }
       },
       "oauth_client": [
@@ -53,7 +53,7 @@
           "client_id": "646748873521-hub74ievcldaqsgnsuifbskd07k6l14r.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.flutter_mvvm_template",
+            "package_name": "com.example.Quizz",
             "certificate_hash": "74d1b5f86c533556e0877e0c3ab56be36590ca6a"
           }
         },

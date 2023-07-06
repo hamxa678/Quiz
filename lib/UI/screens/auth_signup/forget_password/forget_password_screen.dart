@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_template/core/constants/colors.dart';
-import 'package:flutter_mvvm_template/core/enums/view_state.dart';
+import 'package:Quizz/core/constants/colors.dart';
+import 'package:Quizz/core/enums/view_state.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 import 'forget_password_view_model.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_template/UI/screens/root/root_screen_view_model.dart';
+import 'package:Quizz/UI/screens/root/root_screen_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -9,8 +9,7 @@ class RootScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<
-        RootScreenViewModel>(
+    return ChangeNotifierProvider<RootScreenViewModel>(
       create: (context) => RootScreenViewModel(),
       child: Consumer<RootScreenViewModel>(builder: (context, model, child) {
         return WillPopScope(

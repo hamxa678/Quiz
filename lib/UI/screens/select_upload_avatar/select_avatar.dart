@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_template/UI/custom_widget/custom_button.dart';
-import 'package:flutter_mvvm_template/UI/screens/select_upload_avatar/select_avatar_viewmodel.dart';
-import 'package:flutter_mvvm_template/core/constants/strings.dart';
+import 'package:Quizz/UI/custom_widget/custom_button.dart';
+import 'package:Quizz/UI/screens/select_upload_avatar/select_avatar_viewmodel.dart';
+import 'package:Quizz/core/constants/strings.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';

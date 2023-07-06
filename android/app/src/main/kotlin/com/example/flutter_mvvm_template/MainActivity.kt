@@ -1,4 +1,4 @@
-package com.example.flutter_mvvm_template
+package com.example.Quizz
 
 import io.flutter.embedding.android.FlutterActivity
 
