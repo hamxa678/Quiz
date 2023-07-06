@@ -6,7 +6,8 @@ import 'package:flutter_mvvm_template/UI/screens/splash_screen.dart';
 import 'package:flutter_mvvm_template/core/services/localization_service.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
+
+import 'UI/screens/home/home_screen.dart';
 
 class MyApp extends StatelessWidget {
   final String title;
@@ -22,10 +23,12 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(_designWidth, _designHeight),
       builder: (context, widget) => GetMaterialApp(
+      
+        debugShowCheckedModeBanner: false,
         translations: LocalizationService(),
         locale: const Locale("en"),
         title: title,
-        home: const UploadAvatarScreen(),
+        home: const HomeScreen(),
         // const SignUpScreen()
         // const SplashScreen(),
       ),
