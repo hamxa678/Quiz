@@ -1,3 +1,4 @@
+import 'package:Quizz/UI/screens/quiz_result/quiz_result_screen_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:Quizz/UI/screens/auth_signup/sign_up/sign_up_screen.dart';
 import 'package:Quizz/UI/screens/select_upload_avatar/select_avatar.dart';
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
         translations: LocalizationService(),
         locale: const Locale("en"),
         title: title,
-        home: const HomeScreen(),
+        home: const ResultScreen(),
+        // const HomeScreen(),
         // const SignUpScreen()
         // const SplashScreen(),
       ),
