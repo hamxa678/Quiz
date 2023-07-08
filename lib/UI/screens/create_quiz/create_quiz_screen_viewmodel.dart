@@ -1,10 +1,10 @@
 import 'package:Quizz/core/others/base_view_model.dart';
 
 class CreateQuizScreenViewModel extends BaseViewModel {
-  int currentIndex = 0;
+  int numberOfQuestion = 1;
 
-  updateIndex(int index) {
-    currentIndex = index;
+  incrementNumberOfQuestion() {
+    numberOfQuestion++;
     notifyListeners();
   }
 }
