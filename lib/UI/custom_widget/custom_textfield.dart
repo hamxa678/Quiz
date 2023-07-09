@@ -10,6 +10,7 @@ class CustomTextField extends StatelessWidget {
       this.prefexIcon,
       // this.suffexIcon,
       this.onTap,
+      this.onChange,
       this.enable = true,
       this.width = double.infinity,
       // this.hintStyle,
@@ -27,6 +28,7 @@ class CustomTextField extends StatelessWidget {
   final Widget? prefexIcon;
   // final Widget? suffexIcon;
   final VoidCallback? onTap;
+  void Function(String)? onChange;
   TextInputType? keyboardtype;
   final bool enable;
   final double? width;
@@ -51,6 +53,7 @@ class CustomTextField extends StatelessWidget {
         onSaved: onSaved,
         enabled: enable,
         onTap: onTap,
+        onChanged: onChange,
         obscureText: obscureText,
         controller: controller,
         style: TextStyle(
@@ -65,7 +68,10 @@ class CustomTextField extends StatelessWidget {
             borderRadius: BorderRadius.circular(6.r),
             borderSide: const BorderSide(color: Color(0xffD9D9D9)),
           ),
-
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(6.r),
+            borderSide: const BorderSide(color: Color(0xffD9D9D9)),
+          ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(6.r),
             borderSide: const BorderSide(color: Color(0xffD9D9D9)),

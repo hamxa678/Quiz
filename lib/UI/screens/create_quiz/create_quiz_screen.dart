@@ -1,7 +1,7 @@
+import 'package:Quizz/UI/custom_widget/custom_button.dart';
 import 'package:Quizz/UI/custom_widget/custom_textfield.dart';
 import 'package:Quizz/UI/screens/create_quiz/create_quiz_screen_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:Quizz/UI/screens/home/home_screen_viewmodel.dart';
 import 'package:Quizz/core/constants/strings.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -20,46 +20,66 @@ class CreateQuizScreen extends StatelessWidget {
             builder: (context, model, child) => Scaffold(
               backgroundColor: Colors.white,
               body: SingleChildScrollView(
-                child: Container(
-                  height: 1.sh,
-                  width: 1.sw,
-                  padding: EdgeInsets.fromLTRB(25.w, 65.h, 25.w, 0),
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('${staticImage}Background.png'),
-                      fit: BoxFit.cover,
+                child: Form(
+                  key: model.formKey,
+                  child: Container(
+                    height: 1.sh,
+                    width: 1.sw,
+                    padding: EdgeInsets.fromLTRB(25.w, 65.h, 25.w, 0),
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('${staticImage}Background.png'),
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _appBar(),
-                      59.verticalSpace,
-                      Expanded(
-                        child: ListView.builder(
-                          padding: EdgeInsets.only(bottom: 20.h),
-                          shrinkWrap: true,
-                          itemCount: model.quizQuestionList.length + 1,
-                          itemBuilder: (context, index) {
-                            if (index < model.quizQuestionList.length) {
-                              return _question(index + 1, model);
-                            } else {
-                              return GestureDetector(
-                                onTap: () {
-                                  model.incrementQuestion();
-                                },
-                                child: Text('+ Add question',
-                                    style: TextStyle(
-                                        color: const Color(0xffFFFFFF),
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: 'Poppins',
-                                        fontSize: 20.sp)),
-                              );
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _appBar(),
+                        59.verticalSpace,
+                        Expanded(
+                          child: ListView.builder(
+                            padding: EdgeInsets.only(bottom: 20.h),
+                            shrinkWrap: true,
+                            itemCount: model.quizQuestionList.length + 1,
+                            itemBuilder: (context, index) {
+                              if (index < model.quizQuestionList.length) {
+                                return _question(index + 1, model);
+                              } else {
+                                return GestureDetector(
+                                  onTap: () {
+                                    model.incrementQuestion();
+                                  },
+                                  child: Text('+ Add question',
+                                      style: TextStyle(
+                                          color: const Color(0xffFFFFFF),
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: 'Poppins',
+                                          fontSize: 20.sp)),
+                                );
+                              }
+                            },
+                          ),
+                        ),
+                        20.verticalSpace,
+                        CustomButton(
+                          titleWidget: Text(
+                            'Create Quiz',
+                            style: TextStyle(
+                                color: const Color(0xff4530B2),
+                                fontWeight: FontWeight.w500,
+                                fontFamily: 'Poppins',
+                                fontSize: 20.sp),
+                          ),
+                          onPressed: () {
+                            if (model.formKey.currentState!.validate()) {
+                              // model.createQuiz();
                             }
                           },
                         ),
-                      ),
-                    ],
+                        25.verticalSpace,
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -87,6 +107,18 @@ class CreateQuizScreen extends StatelessWidget {
           ),
           14.verticalSpace,
           CustomTextField(
+            validator: (String? value) {
+              if (value!.isEmpty) {
+                return 'Please enter question';
+              } else {
+                return null;
+              }
+            },
+            controller: TextEditingController(
+                text: model.quizQuestionList[questionNumber - 1].question),
+            onChange: (String question) {
+              model.quizQuestionList[questionNumber - 1].question = question;
+            },
             hintText: 'Enter your question here',
           ),
           18.verticalSpace,
@@ -114,6 +146,20 @@ class CreateQuizScreen extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.only(bottom: 10.h),
                   child: CustomTextField(
+                      validator: (String? value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter option';
+                        } else {
+                          return null;
+                        }
+                      },
+                      onChange: (String option) {
+                        model.quizQuestionList[questionNumber - 1]
+                            .options![index].option = option;
+                      },
+                      controller: TextEditingController(
+                          text: model.quizQuestionList[questionNumber - 1]
+                              .options![index].option),
                       hintText: 'Option ${index + 1}',
                       suffixIcon: Radio(
                         fillColor: MaterialStateProperty.all(
@@ -158,6 +204,8 @@ class CreateQuizScreen extends StatelessWidget {
               ),
             ],
           ),
+          10.verticalSpace,
+          const Divider(color: Colors.white, thickness: 1),
           25.verticalSpace,
         ],
       ),
