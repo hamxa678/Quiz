@@ -52,7 +52,7 @@ class QuizCompleteScreen extends StatelessWidget {
                               fontSize: 18.sp)),
                       36.verticalSpace,
                       CustomTextField(
-                        // enable: false,
+                        readOnly: true,
                         controller: TextEditingController(
                           text: 'DJKAS7587',
                         ),
@@ -75,6 +75,18 @@ class QuizCompleteScreen extends StatelessWidget {
                             },
                             child: const Icon(Icons.copy,
                                 color: Color(0xffFFFFFF))),
+                      ),
+                      36.verticalSpace,
+                      CustomButton(
+                        onPressed: () {
+                          // do something
+                        },
+                        titleWidget: Text('Done',
+                            style: TextStyle(
+                                color: const Color(0xff4530B2),
+                                fontWeight: FontWeight.w500,
+                                fontFamily: 'Poppins',
+                                fontSize: 22.sp)),
                       ),
                     ],
                   ),
