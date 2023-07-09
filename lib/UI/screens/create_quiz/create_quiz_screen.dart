@@ -114,30 +114,51 @@ class CreateQuizScreen extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.only(bottom: 10.h),
                   child: CustomTextField(
-                    hintText: 'Option ${index + 1}',
-                  ),
+                      hintText: 'Option ${index + 1}',
+                      suffixIcon: Radio(
+                        fillColor: MaterialStateProperty.all(
+                          const Color(0xffFFFFFF),
+                        ),
+                        activeColor: Colors.white,
+                        value: index + 1,
+                        groupValue: model
+                            .quizQuestionList[questionNumber - 1].correctOption,
+                        onChanged: (value) {
+                          model.toggleCorrectOption(questionNumber - 1, index);
+                        },
+                      )),
                 ),
               );
             },
           ),
           10.verticalSpace,
-          Align(
-            alignment: Alignment.centerRight,
-            child: GestureDetector(
-              onTap: () {
-                model.incrementOption(questionNumber - 1);
-              },
-              child: Text(
-                '+ Add option',
+          Row(
+            children: [
+              Text(
+                'Correct option: ${model.quizQuestionList[questionNumber - 1].correctOption}',
                 style: TextStyle(
                     color: const Color(0xffFFFFFF),
                     fontWeight: FontWeight.w500,
                     fontFamily: 'Poppins',
-                    fontSize: 15.sp),
+                    fontSize: 13.sp),
               ),
-            ),
+              const Spacer(),
+              GestureDetector(
+                onTap: () {
+                  model.incrementOption(questionNumber - 1);
+                },
+                child: Text(
+                  '+ Add option',
+                  style: TextStyle(
+                      color: const Color(0xffFFFFFF),
+                      fontWeight: FontWeight.w500,
+                      fontFamily: 'Poppins',
+                      fontSize: 15.sp),
+                ),
+              ),
+            ],
           ),
-          14.verticalSpace,
+          25.verticalSpace,
         ],
       ),
     );

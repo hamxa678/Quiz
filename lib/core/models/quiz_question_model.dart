@@ -1,8 +1,9 @@
 class QuizQuestionModel {
   String? question;
   List<Options>? options;
+  int? correctOption;
 
-  QuizQuestionModel({this.question, this.options});
+  QuizQuestionModel({this.question, this.options, this.correctOption});
 
   QuizQuestionModel.fromJson(Map<String, dynamic> json) {
     question = json['question'];
@@ -12,6 +13,7 @@ class QuizQuestionModel {
         options!.add(Options.fromJson(v));
       });
     }
+    correctOption = json['correctOption'];
   }
 
   Map<String, dynamic> toJson() {
@@ -20,6 +22,7 @@ class QuizQuestionModel {
     if (options != null) {
       data['options'] = options!.map((v) => v.toJson()).toList();
     }
+    data['correctOption'] = correctOption;
     return data;
   }
 }
