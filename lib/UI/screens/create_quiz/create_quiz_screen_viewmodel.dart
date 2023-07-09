@@ -17,4 +17,14 @@ class CreateQuizScreenViewModel extends BaseViewModel {
     quizQuestionList[index].options!.add(Options());
     notifyListeners();
   }
+
+  deleteQuestion(int index){
+    quizQuestionList.removeAt(index);
+    notifyListeners();
+  }
+
+  deleteOption(int index, int optionIndex){
+    quizQuestionList[index].options!.removeAt(optionIndex);
+    notifyListeners();
+  }
 }

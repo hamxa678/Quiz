@@ -69,64 +69,77 @@ class CreateQuizScreen extends StatelessWidget {
   }
 
   Widget _question(int questionNumber, CreateQuizScreenViewModel model) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Question $questionNumber:',
-          style: TextStyle(
-              color: const Color(0xffFFFFFF),
-              fontWeight: FontWeight.w500,
-              fontFamily: 'Poppins',
-              fontSize: 20.sp),
-        ),
-        14.verticalSpace,
-        CustomTextField(
-          hintText: 'Enter your question here',
-        ),
-        18.verticalSpace,
-        Text(
-          'Options:',
-          style: TextStyle(
-              color: const Color(0xffFFFFFF),
-              fontWeight: FontWeight.w500,
-              fontFamily: 'Poppins',
-              fontSize: 15.sp),
-        ),
-        10.verticalSpace,
-        ListView.builder(
-          padding: EdgeInsets.zero,
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: model.quizQuestionList[questionNumber - 1].options!.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: EdgeInsets.only(bottom: 10.h),
-              child: CustomTextField(
-                hintText: 'Option ${index + 1}',
-              ),
-            );
-          },
-        ),
-        10.verticalSpace,
-        Align(
-          alignment: Alignment.centerRight,
-          child: GestureDetector(
-            onTap: () {
-              model.incrementOption(questionNumber - 1);
+    return Dismissible(
+      key: UniqueKey(),
+      onDismissed: (DismissDirection direction) {
+        model.deleteQuestion(questionNumber - 1);
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Question $questionNumber:',
+            style: TextStyle(
+                color: const Color(0xffFFFFFF),
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Poppins',
+                fontSize: 20.sp),
+          ),
+          14.verticalSpace,
+          CustomTextField(
+            hintText: 'Enter your question here',
+          ),
+          18.verticalSpace,
+          Text(
+            'Options:',
+            style: TextStyle(
+                color: const Color(0xffFFFFFF),
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Poppins',
+                fontSize: 15.sp),
+          ),
+          10.verticalSpace,
+          ListView.builder(
+            padding: EdgeInsets.zero,
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount:
+                model.quizQuestionList[questionNumber - 1].options!.length,
+            itemBuilder: (context, index) {
+              return Dismissible(
+                key: UniqueKey(),
+                onDismissed: (DismissDirection direction) {
+                  model.deleteOption(questionNumber - 1, index);
+                },
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 10.h),
+                  child: CustomTextField(
+                    hintText: 'Option ${index + 1}',
+                  ),
+                ),
+              );
             },
-            child: Text(
-              '+ Add option',
-              style: TextStyle(
-                  color: const Color(0xffFFFFFF),
-                  fontWeight: FontWeight.w500,
-                  fontFamily: 'Poppins',
-                  fontSize: 15.sp),
+          ),
+          10.verticalSpace,
+          Align(
+            alignment: Alignment.centerRight,
+            child: GestureDetector(
+              onTap: () {
+                model.incrementOption(questionNumber - 1);
+              },
+              child: Text(
+                '+ Add option',
+                style: TextStyle(
+                    color: const Color(0xffFFFFFF),
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'Poppins',
+                    fontSize: 15.sp),
+              ),
             ),
           ),
-        ),
-        14.verticalSpace,
-      ],
+          14.verticalSpace,
+        ],
+      ),
     );
   }
 
