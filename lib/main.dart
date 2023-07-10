@@ -6,6 +6,7 @@ import 'package:Quizz/app.dart';
 import 'package:Quizz/core/others/logger_customizations/custom_logger.dart';
 import 'package:Quizz/firebase_options.dart';
 import 'package:Quizz/locator.dart';
+import 'package:flutter/services.dart';
 import 'core/enums/env.dart';
 
 Future<void> main() async {
@@ -31,8 +32,10 @@ Future<void> main() async {
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
     await setupLocator(Env.production);
 
-    /// Running the app
-    runApp(const MyApp(title: 'App Name'));
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+        .then((_) {
+      runApp(const MyApp(title: 'App Name'));
+    });
   } catch (e) {
     log.e("$e");
   }
