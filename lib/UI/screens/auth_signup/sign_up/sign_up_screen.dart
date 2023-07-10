@@ -176,6 +176,7 @@ class SignUpScreen extends StatelessWidget {
                                 ),
                           onPressed: () {
                             if (model.formKey.currentState!.validate()) {
+                              model.signUp();
                               // model.loginWithEmailAndPassword();
                             }
                           },
