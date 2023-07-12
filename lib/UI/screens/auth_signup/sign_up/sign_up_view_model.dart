@@ -73,10 +73,14 @@ class SignUpViewModel extends BaseViewModel {
   signUp() async {
     setState(ViewState.busy);
     bool response;
-    response =
-        await _firebaseAuthService.signupWithEmailAndPassword(signUpBody);
+    response = await _firebaseAuthService.signupWithEmailAndPassword(SignUpBody(
+        email: emailController.text,
+        password: passwordController.text,
+        name: fullNameController.text,
+        username: userNameController.text));
     if (response) {
-      Get.offAll(const RootScreen());
+      print("User created");
+      // Get.offAll(const RootScreen());
     }
     setState(ViewState.idle);
   }

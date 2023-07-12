@@ -26,17 +26,18 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(_designWidth, _designHeight),
       builder: (context, widget) => GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        translations: LocalizationService(),
-        locale: const Locale("en"),
-        title: title,
-        home: const QuizCompleteScreen(),
-        // const CreateQuizScreen(),
-        // const ResultScreen(),
-        // const HomeScreen(),
-        // const SignUpScreen()
-        // const SplashScreen(),
-      ),
+          debugShowCheckedModeBanner: false,
+          translations: LocalizationService(),
+          locale: const Locale("en"),
+          title: title,
+          home:
+              // const QuizCompleteScreen(),
+              // const CreateQuizScreen(),
+              // const ResultScreen(),
+              // const HomeScreen(),
+              const SignUpScreen()
+          // const SplashScreen(),
+          ),
     );
   }
 }
