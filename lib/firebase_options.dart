@@ -44,40 +44,40 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAy-l8pUtU_GXp-wJiZpOqJc7Y_3sSTwsk',
-    appId: '1:351413438688:web:d47cfb55cd4f4e8d80e885',
-    messagingSenderId: '351413438688',
-    projectId: 'quizz-a0bb3',
-    authDomain: 'quizz-a0bb3.firebaseapp.com',
-    storageBucket: 'quizz-a0bb3.appspot.com',
-    measurementId: 'G-2MTFJ1D0FF',
+    apiKey: 'AIzaSyDFG3_mN46jnjDqXy_TRhKHKRwOGBFkGNU',
+    appId: '1:121116557971:web:904818ae76ed7658198366',
+    messagingSenderId: '121116557971',
+    projectId: 'quizz-ce4f8',
+    authDomain: 'quizz-ce4f8.firebaseapp.com',
+    storageBucket: 'quizz-ce4f8.appspot.com',
+    measurementId: 'G-3QK9RJ9B1M',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAHyUzOnsQJwQtmGKSgetqKtivc0zVVnhk',
-    appId: '1:351413438688:android:7c2736403d419af080e885',
-    messagingSenderId: '351413438688',
-    projectId: 'quizz-a0bb3',
-    storageBucket: 'quizz-a0bb3.appspot.com',
+    apiKey: 'AIzaSyBNOyIMgAkNAe6pWlykOBK0xSrToGuntqQ',
+    appId: '1:121116557971:android:090eec6c263ea4af198366',
+    messagingSenderId: '121116557971',
+    projectId: 'quizz-ce4f8',
+    storageBucket: 'quizz-ce4f8.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCJBZLP2O9I1_Va3PT58TXuaXViepsU1VQ',
-    appId: '1:351413438688:ios:204d3ff34069f82780e885',
-    messagingSenderId: '351413438688',
-    projectId: 'quizz-a0bb3',
-    storageBucket: 'quizz-a0bb3.appspot.com',
-    iosClientId: '351413438688-3upva5jm7nb1ioo41ippja961q5brl1s.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBK7s4BM8SRrnkm_sORoUqDx3CDt5uH4Uc',
+    appId: '1:121116557971:ios:838b6f617f0782e5198366',
+    messagingSenderId: '121116557971',
+    projectId: 'quizz-ce4f8',
+    storageBucket: 'quizz-ce4f8.appspot.com',
+    iosClientId: '121116557971-lhclt1br39rqnrn13v7rtbge2fm4tfhu.apps.googleusercontent.com',
     iosBundleId: 'com.example.Quizz',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCJBZLP2O9I1_Va3PT58TXuaXViepsU1VQ',
-    appId: '1:351413438688:ios:204d3ff34069f82780e885',
-    messagingSenderId: '351413438688',
-    projectId: 'quizz-a0bb3',
-    storageBucket: 'quizz-a0bb3.appspot.com',
-    iosClientId: '351413438688-3upva5jm7nb1ioo41ippja961q5brl1s.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBK7s4BM8SRrnkm_sORoUqDx3CDt5uH4Uc',
+    appId: '1:121116557971:ios:838b6f617f0782e5198366',
+    messagingSenderId: '121116557971',
+    projectId: 'quizz-ce4f8',
+    storageBucket: 'quizz-ce4f8.appspot.com',
+    iosClientId: '121116557971-lhclt1br39rqnrn13v7rtbge2fm4tfhu.apps.googleusercontent.com',
     iosBundleId: 'com.example.Quizz',
   );
 }

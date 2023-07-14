@@ -79,8 +79,7 @@ class SignUpViewModel extends BaseViewModel {
         name: fullNameController.text,
         username: userNameController.text));
     if (response) {
-      print("User created");
-      // Get.offAll(const RootScreen());
+      Get.offAll(const RootScreen());
     }
     setState(ViewState.idle);
   }

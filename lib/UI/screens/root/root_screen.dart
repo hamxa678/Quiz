@@ -51,18 +51,18 @@ class RootScreen extends StatelessWidget {
                     Text(
                       '${model.firebaseAuthService.userProfile!.name}',
                     ),
-                    20.verticalSpace,
-                    Text(
-                      '${model.firebaseAuthService.userProfile!.phone}',
-                    ),
-                    20.verticalSpace,
-                    Text(
-                      '${model.firebaseAuthService.userProfile!.dob}',
-                    ),
-                    20.verticalSpace,
-                    Text(
-                      '${model.firebaseAuthService.userProfile!.gender}',
-                    ),
+                    // 20.verticalSpace,
+                    // Text(
+                    //   '${model.firebaseAuthService.userProfile!.phone}',
+                    // ),
+                    // 20.verticalSpace,
+                    // Text(
+                    //   '${model.firebaseAuthService.userProfile!.dob}',
+                    // ),
+                    // 20.verticalSpace,
+                    // Text(
+                    //   '${model.firebaseAuthService.userProfile!.gender}',
+                    // ),
                     20.verticalSpace,
                     Text(
                       '${model.firebaseAuthService.userProfile!.email}',
