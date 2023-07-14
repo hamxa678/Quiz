@@ -64,9 +64,19 @@ class SelectAvatarScreen extends StatelessWidget {
                         children: List.generate(model.avatars.length, (index) {
                           return GestureDetector(
                               onTap: () {
+                                model.selectAvatar(index);
                                 // do something
                               },
-                              child: Image.asset(model.avatars[index]));
+                              child: Stack(
+                                children: [
+                                  Image.asset(model.avatars[index]),
+                                  if (model.selectedAvatarIndex == index)
+                                    SvgPicture.asset(
+                                      '${staticIcon}selected.svg',
+                                      fit: BoxFit.scaleDown,
+                                    )
+                                ],
+                              ));
                         }),
                       ),
                       24.verticalSpace,
@@ -100,6 +110,7 @@ class SelectAvatarScreen extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
+                          model.uploadAvatar();
                           // do something
                         },
                       ),

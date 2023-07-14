@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -21,6 +22,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import '../../UI/custom_widget/dialogbox/auth_dialog.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 ///
 /// [FirebaseAuthService] class contains all authentication related logic with following
@@ -199,6 +201,23 @@ class FirebaseAuthService {
     }
   }
 
+  /// uploading image to firebase storage
+  uploadProfileToFirebaseStorage(String filePath) async {
+    print('uploading image to firebase storage');
+    String filename = filePath.split('/').last;
+    firebase_storage.Reference storageRef =
+        firebase_storage.FirebaseStorage.instance.ref().child(filename);
+    firebase_storage.UploadTask uploadTask = storageRef.putFile(File(filePath));
+
+    String downloadURL;
+    await uploadTask.whenComplete(() async {
+      downloadURL = await storageRef.getDownloadURL();
+
+      await documentReference.update({'profileImage': downloadURL});
+    });
+    print('uploading image to firebase storage completed');
+  }
+
   /// [signInWithApple] method is used for signup with Apple.
   signInWithApple() async {
     final rawNonce = generateNonce();
@@ -247,6 +266,10 @@ class FirebaseAuthService {
       _localStorageService.isLogin = true;
     });
     return true;
+  }
+
+  uploadProfileImage(String url) async {
+    await documentReference.update({'profileImage': url});
   }
 
   /// This method is used for deleting user details in firestore.

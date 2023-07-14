@@ -1,3 +1,4 @@
+import 'package:Quizz/UI/screens/select_upload_avatar/select_avatar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:Quizz/UI/screens/root/root_screen.dart';
@@ -79,7 +80,7 @@ class SignUpViewModel extends BaseViewModel {
         name: fullNameController.text,
         username: userNameController.text));
     if (response) {
-      Get.offAll(const RootScreen());
+      Get.offAll(const SelectAvatarScreen());
     }
     setState(ViewState.idle);
   }
