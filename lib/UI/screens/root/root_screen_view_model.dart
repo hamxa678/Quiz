@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:Quizz/core/services/firebase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:Quizz/UI/screens/auth_signup/login/login_screen.dart';
 import 'package:Quizz/core/enums/view_state.dart';
@@ -13,6 +14,8 @@ import 'package:get/get.dart';
 class RootScreenViewModel extends BaseViewModel {
   // late CartScreenViewModel cartmodel;
   FirebaseAuthService firebaseAuthService = locator<FirebaseAuthService>();
+  FirebaseService firebaseService = locator<FirebaseService>();
+
   RootScreenViewModel() {
     // Timer.periodic(const Duration(milliseconds: 100), (timer) {
     //   // print(timer);
