@@ -28,13 +28,13 @@ class FirebaseService {
   UserProfile userProfile = UserProfile();
   Onboarding? onboarding;
 
-  Future<void> uploadImageToFirebase() async {
+  Future<void> uploadImageToFirebase(String assetImagePath) async {
     // Get a reference to the Firebase Storage bucket
     final storage = FirebaseStorage.instance;
     final storageRef = storage.ref();
 
     // Get the image file from the assets folder
-    final imageBytes = await rootBundle.load('assets/images/1st.png');
+    final imageBytes = await rootBundle.load(assetImagePath);
     final imageData = imageBytes.buffer.asUint8List();
 
     // Create a unique filename for the image

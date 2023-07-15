@@ -1,3 +1,4 @@
+import 'package:Quizz/core/enums/view_state.dart';
 import 'package:flutter/material.dart';
 import 'package:Quizz/UI/custom_widget/custom_button.dart';
 import 'package:Quizz/UI/screens/select_upload_avatar/select_avatar_viewmodel.dart';
@@ -100,15 +101,19 @@ class SelectAvatarScreen extends StatelessWidget {
                       ),
                       37.verticalSpace,
                       CustomButton(
-                        titleWidget: const Text(
-                          'Select',
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 22,
-                            color: Color(0xff4530B2),
-                          ),
-                        ),
+                        titleWidget: model.state == ViewState.busy
+                            ? const CircularProgressIndicator(
+                                color: Color(0xff4530B2),
+                              )
+                            : const Text(
+                                'Select',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 22,
+                                  color: Color(0xff4530B2),
+                                ),
+                              ),
                         onPressed: () {
                           model.uploadAvatar();
                           // do something
