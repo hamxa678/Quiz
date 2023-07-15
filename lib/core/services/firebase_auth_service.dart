@@ -202,21 +202,7 @@ class FirebaseAuthService {
   }
 
   /// uploading image to firebase storage
-  uploadProfileToFirebaseStorage(String filePath) async {
-    print('uploading image to firebase storage');
-    String filename = filePath.split('/').last;
-    firebase_storage.Reference storageRef =
-        firebase_storage.FirebaseStorage.instance.ref().child(filename);
-    firebase_storage.UploadTask uploadTask = storageRef.putFile(File(filePath));
 
-    String downloadURL;
-    await uploadTask.whenComplete(() async {
-      downloadURL = await storageRef.getDownloadURL();
-
-      await documentReference.update({'profileImage': downloadURL});
-    });
-    print('uploading image to firebase storage completed');
-  }
 
   /// [signInWithApple] method is used for signup with Apple.
   signInWithApple() async {

@@ -30,8 +30,8 @@ class SelectAvatarViewModel extends BaseViewModel {
 
   uploadAvatar() {
     if (selectedAvatarIndex != null) {
-      firebaseAuth
-          .uploadProfileToFirebaseStorage(avatars[selectedAvatarIndex!]);
+      // firebaseAuth
+      //     .uploadProfileToFirebaseStorage(avatars[selectedAvatarIndex!]);
     }
   }
 }

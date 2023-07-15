@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 class RootScreen extends StatelessWidget {
   const RootScreen({Key? key}) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<RootScreenViewModel>(
@@ -90,6 +90,7 @@ class RootScreen extends StatelessWidget {
                     ElevatedButton(
                       child: const Text('Get todos'),
                       onPressed: () {
+                        model.firebaseService.uploadImageToFirebase();
                         // Get.to(const CartScreen());
                       },
                     ),
