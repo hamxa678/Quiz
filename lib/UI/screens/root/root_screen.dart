@@ -90,7 +90,7 @@ class RootScreen extends StatelessWidget {
                     ElevatedButton(
                       child: const Text('Get todos'),
                       onPressed: () {
-                        model.firebaseService.uploadImageToFirebase();
+                        // model.firebaseService.uploadImageToFirebase();
                         // Get.to(const CartScreen());
                       },
                     ),

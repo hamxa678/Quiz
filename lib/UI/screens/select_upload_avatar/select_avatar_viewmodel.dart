@@ -1,12 +1,11 @@
+import 'package:Quizz/core/enums/view_state.dart';
 import 'package:Quizz/core/others/base_view_model.dart';
-import 'package:Quizz/core/services/firebase_auth_service.dart';
 import 'package:Quizz/core/services/firebase_service.dart';
 
 import '../../../core/constants/strings.dart';
 import '../../../locator.dart';
 
 class SelectAvatarViewModel extends BaseViewModel {
-  final firebaseAuth = locator<FirebaseAuthService>();
   final firebaseService = locator<FirebaseService>();
   int? selectedAvatarIndex;
 
@@ -28,10 +27,14 @@ class SelectAvatarViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  uploadAvatar() {
+  uploadAvatar() async {
+    setState(ViewState.busy);
+
     if (selectedAvatarIndex != null) {
-      // firebaseAuth
-      //     .uploadProfileToFirebaseStorage(avatars[selectedAvatarIndex!]);
+      await firebaseService
+          .uploadImageToFirebase(avatars[selectedAvatarIndex!]);
     }
+
+    setState(ViewState.idle);
   }
 }
