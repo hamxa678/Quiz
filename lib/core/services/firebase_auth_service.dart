@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:Quizz/UI/screens/auth_signup/login/login_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
@@ -79,7 +80,8 @@ class FirebaseAuthService {
   /// [_getUserProfile] method is used for getting user profile data.
   _getUserProfile() async {
     userProfile = await _firebaseService.getUserProfile();
-    if (userProfile!.profileImageUrl != null || userProfile!.profileImageUrl == '') {
+    if (userProfile!.profileImageUrl != null ||
+        userProfile!.profileImageUrl == '') {
       isAvatarUploaded = true;
       _localStorageService.isAvatarUploaded = true;
     } else {
@@ -285,6 +287,7 @@ class FirebaseAuthService {
   Future<bool> logOut() async {
     await _auth
         .signOut()
+        .whenComplete(() => Get.offAll(const LoginScreen()))
         .onError((error, stackTrace) => Get.snackbar('Error', '$error'));
     isLogin = false;
     _localStorageService.isLogin = null;

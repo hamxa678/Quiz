@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:Quizz/UI/screens/home/home_screen_viewmodel.dart';
 import 'package:Quizz/core/constants/strings.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -23,55 +24,82 @@ class HomeScreen extends StatelessWidget {
                       model.updateIndex(tabController.index);
                     }
                   });
-                  return Scaffold(
-                    floatingActionButton: _floatingActionButton(model, context),
-                    backgroundColor: Colors.white,
-                    body: SingleChildScrollView(
-                      child: Container(
-                        height: 1.sh,
-                        width: 1.sw,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('${staticImage}Background.png'),
-                            fit: BoxFit.cover,
+                  return WillPopScope(
+                    onWillPop: () async {
+                      final status = await Get.dialog(AlertDialog(
+                        title: const Text('Caution!'),
+                        content: const Text(
+                            'Do you really want to close the application?'),
+                        actions: [
+                          ElevatedButton(
+                            onPressed: () {
+                              Get.back(result: true);
+                            },
+                            child: const Text('Yes'),
                           ),
-                        ),
-                        child: Column(
-                          children: [
-                            Padding(
-                                padding:
-                                    EdgeInsets.fromLTRB(25.w, 65.h, 25.w, 0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    _appBar(),
-                                    45.verticalSpace,
-                                    Text(
-                                      'Hi Hamza Khan',
-                                      style: TextStyle(
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 35.sp,
-                                        color: Colors.white,
+                          ElevatedButton(
+                            onPressed: () {
+                              Get.back(result: false);
+                            },
+                            child: const Text('No'),
+                          ),
+                        ],
+                      ));
+
+                      return status;
+                    },
+                    child: Scaffold(
+                      floatingActionButton:
+                          _floatingActionButton(model, context),
+                      backgroundColor: Colors.white,
+                      body: SingleChildScrollView(
+                        child: Container(
+                          height: 1.sh,
+                          width: 1.sw,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage('${staticImage}Background.png'),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          child: Column(
+                            children: [
+                              Padding(
+                                  padding:
+                                      EdgeInsets.fromLTRB(25.w, 65.h, 25.w, 0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      _appBar(model),
+                                      45.verticalSpace,
+                                      Text(
+                                        'Hi ${model.firebaseService.userProfile.name}',
+                                        style: TextStyle(
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 35.sp,
+                                          color: Colors.white,
+                                        ),
                                       ),
-                                    ),
-                                    4.verticalSpace,
-                                    Text(
-                                      'Welcome to Quizz',
-                                      style: TextStyle(
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 20.sp,
-                                        color: Colors.white,
+                                      4.verticalSpace,
+                                      Text(
+                                        'Welcome to Quizz',
+                                        style: TextStyle(
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 20.sp,
+                                          color: Colors.white,
+                                        ),
                                       ),
-                                    ),
-                                    35.verticalSpace,
-                                    _tapBar(model),
-                                    25.verticalSpace,
-                                  ],
-                                )),
-                            _tabBarView()
-                          ],
+                                      35.verticalSpace,
+                                      _tapBar(model),
+                                      25.verticalSpace,
+                                    ],
+                                  )),
+                              _tabBarView()
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -236,21 +264,47 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _appBar() {
+  Widget _appBar(HomeScreenViewModel model) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SvgPicture.asset(
-          '${staticIcon}logo1.svg',
-          fit: BoxFit.scaleDown,
+        GestureDetector(
+          onTap: () {
+            model.firebaseAuthService.logOut();
+          },
+          child: SvgPicture.asset(
+            '${staticIcon}logo1.svg',
+            fit: BoxFit.scaleDown,
+          ),
         ),
         const Spacer(),
-        Image.asset(
-          '${staticImage}ava1.png',
-          height: 45.h,
-          width: 45.w,
-          fit: BoxFit.scaleDown,
-        ),
+        (model.firebaseService.userProfile.profileImageUrl == null ||
+                model.firebaseService.userProfile.profileImageUrl! == '')
+            ? Container(
+                height: 45.h,
+                width: 45.w,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.white, width: 2.w),
+                  image: const DecorationImage(
+                    image: AssetImage('assets/images/avatar.png'),
+                    fit: BoxFit.scaleDown,
+                  ),
+                ),
+              )
+            : Container(
+                height: 45.h,
+                width: 45.w,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.white, width: 2.w),
+                  image: DecorationImage(
+                    image: NetworkImage(
+                        model.firebaseService.userProfile.profileImageUrl!),
+                    fit: BoxFit.scaleDown,
+                  ),
+                ),
+              ),
       ],
     );
   }

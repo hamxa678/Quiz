@@ -1,3 +1,4 @@
+import 'package:Quizz/UI/screens/home/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:Quizz/UI/screens/auth_signup/sign_up/sign_up_screen.dart';
@@ -35,7 +36,7 @@ class LoginViewModel extends BaseViewModel {
     bool successLogin =
         await firebaseAuthService.loginWithEmailAndPassword(loginBody);
     if (successLogin) {
-      Get.offAll(const RootScreen());
+      Get.offAll(const HomeScreen());
     }
     setState(ViewState.idle);
   }
@@ -47,7 +48,7 @@ class LoginViewModel extends BaseViewModel {
     bool routeToRoot = await firebaseAuthService.isRecordExist();
     if (user != null) {
       (routeToRoot)
-          ? Get.offAll(const RootScreen())
+          ? Get.offAll(const HomeScreen())
           : Get.to(const SignUpScreen());
     }
   }

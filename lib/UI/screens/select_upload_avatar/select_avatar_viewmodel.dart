@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:Quizz/UI/screens/home/home_screen.dart';
 import 'package:Quizz/UI/screens/root/root_screen.dart';
 import 'package:Quizz/core/enums/view_state.dart';
 import 'package:Quizz/core/others/base_view_model.dart';
@@ -47,8 +48,7 @@ class SelectAvatarViewModel extends BaseViewModel {
   }
 
   skipAvatar() {
-    print('skip avatar'); 
-    Get.to(const RootScreen());
+    Get.to(const HomeScreen());
 
     firebaseService.avatarUploadSkipped();
   }

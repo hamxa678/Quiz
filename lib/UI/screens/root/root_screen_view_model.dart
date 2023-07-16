@@ -54,6 +54,13 @@ class RootScreenViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  int currentIndex = 0;
+
+  updateIndex(int index) {
+    currentIndex = index;
+    notifyListeners();
+  }
+
   Future<void> logOut() async {
     bool loggedOut = await firebaseAuthService.logOut();
     (loggedOut) ? Get.offAll(const LoginScreen()) : null;

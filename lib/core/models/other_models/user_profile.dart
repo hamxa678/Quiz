@@ -1,7 +1,14 @@
-import 'package:dio/dio.dart' as dio;
+// import 'package:dio/dio.dart' as dio;
 
 class UserProfile {
-  String? fullName;
+  //   String? name;
+  // String? username;
+  // String? email;
+  // String? password;
+
+  // File? image;
+
+  String? userName;
   String? name;
   String? email;
   String? password;
@@ -13,7 +20,7 @@ class UserProfile {
   // String? dob;
 
   UserProfile({
-    this.fullName,
+    this.userName,
     this.name,
     this.email,
     this.password,
@@ -22,7 +29,7 @@ class UserProfile {
 
   factory UserProfile.fromMap(map) {
     return UserProfile(
-      fullName: map['fullName'],
+      userName: map['username'],
       name: map['name'],
       email: map['email'],
       password: map['password'],
@@ -36,7 +43,7 @@ class UserProfile {
   }
   Map<String, dynamic> toMap() {
     return {
-      'fullName': fullName,
+      'username': userName,
       'name': name,
       'email': email,
       'password': password,
@@ -48,7 +55,7 @@ class UserProfile {
 
   Future<Map<String, dynamic>> toJson() async {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['fullName'] = fullName;
+    data['userName'] = userName;
     data['name'] = name;
     data['email'] = email;
     data['password'] = password;
@@ -62,7 +69,7 @@ class UserProfile {
 
   deepCopy() {
     return UserProfile(
-        fullName: fullName,
+        userName: userName,
         name: name,
         email: email,
         password: password,
