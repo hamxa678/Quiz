@@ -7,7 +7,7 @@ class UserProfile {
   String? password;
   // String? fcmToken;
   // String? phone;
-  // String? imageUrl;
+  String? profileImageUrl;
   // String? gender;
   // String? location;
   // String? dob;
@@ -17,6 +17,7 @@ class UserProfile {
     this.name,
     this.email,
     this.password,
+    this.profileImageUrl
   });
 
   factory UserProfile.fromMap(map) {
@@ -27,7 +28,7 @@ class UserProfile {
       password: map['password'],
       // fcmToken: map['fcm_token'],
       // phone: map['phone'],
-      // imageUrl: map['image_url'],
+      profileImageUrl: map['profileImage'],
       // gender: map['gender'],
       // location: map['location'],
       // dob: map['dob'],

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:Quizz/locator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:Quizz/core/models/body/login_body.dart';
@@ -13,11 +14,14 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+import 'local_storage_service.dart';
+
 class FirebaseService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final firebase_storage.FirebaseStorage _storage =
       firebase_storage.FirebaseStorage.instance;
+  final _localStorageService = locator<LocalStorageService>();
 
   User? get currentUser => _auth.currentUser;
   String? get currentUserUID => currentUser!.uid;
@@ -28,20 +32,28 @@ class FirebaseService {
   UserProfile userProfile = UserProfile();
   Onboarding? onboarding;
 
-  Future<void> uploadImageToFirebase(String assetImagePath) async {
+  Future<void> uploadImageToFirebase(
+      bool isAsset, String assetImagePath, File? uploadedMediaImage) async {
     // Get a reference to the Firebase Storage bucket
     final storage = FirebaseStorage.instance;
     final storageRef = storage.ref();
 
-    // Get the image file from the assets folder
-    final imageBytes = await rootBundle.load(assetImagePath);
-    final imageData = imageBytes.buffer.asUint8List();
-
-    // Create a unique filename for the image
+    final Uint8List image;
+    final UploadTask uploadTask;
     final fileName = '${DateTime.now().millisecondsSinceEpoch}.png';
 
+    // Get the image file from the assets folder
+    if (isAsset) {
+      final imageBytes = await rootBundle.load(assetImagePath);
+      image = imageBytes.buffer.asUint8List();
+      uploadTask = storageRef.child(fileName).putData(image);
+    } else {
+      uploadTask = storageRef.child(fileName).putFile(uploadedMediaImage!);
+    }
+
+    // Create a unique filename for the image
+
     // Upload the image to Firebase Storage
-    final uploadTask = storageRef.child(fileName).putData(imageData);
 
     // Wait for the upload to complete
     final snapshot = await uploadTask.whenComplete(() {});
@@ -55,6 +67,15 @@ class FirebaseService {
     }).whenComplete(
       () => Get.snackbar('Success', 'Image uploaded successfully'),
     );
+  }
+
+  avatarUploadSkipped() {
+    documentReferenceForUser.update({
+      'profileImage': '',
+    }).whenComplete(
+      () => Get.snackbar('Skipped', 'Image uploading skipped'),
+    );
+    _localStorageService.isAvatarUploaded = true;
   }
 
   Future<UserProfile> getUserProfile() async {

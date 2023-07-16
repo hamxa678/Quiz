@@ -18,6 +18,7 @@ import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
 import '../../locator.dart';
+import 'select_upload_avatar/select_avatar.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -88,12 +89,16 @@ class _SplashScreenState extends State<SplashScreen> {
     ///checking if the user is login or not
     ///
     log.d('@_initialSetup. Login State: ${_FirebaseAuthService.isLogin}');
-    if (_FirebaseAuthService.isLogin) {
+    if (!_FirebaseAuthService.isLogin) {
+      Get.off(() => const LoginScreen());
+    } else if (_FirebaseAuthService.isAvatarUploaded) {
       Get.off(() => const RootScreen());
     } else {
-      Get.off(() => const LoginScreen());
+      Get.off(() => const SelectAvatarScreen());
     }
   }
+
+  // _FirebaseAuthService.isLogin
 
   Future<List<Image>> _preCacheOnboardingImages(
       List<Onboarding> onboardingList) async {

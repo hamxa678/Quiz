@@ -51,6 +51,7 @@ class FirebaseAuthService {
       _firestore.collection('users').doc(currentUserUID);
 
   late bool isLogin;
+  late bool isAvatarUploaded;
   final _localStorageService = locator<LocalStorageService>();
   final _firebaseService = locator<FirebaseService>();
   UserProfile? userProfile;
@@ -65,6 +66,7 @@ class FirebaseAuthService {
   ///
   doSetup() async {
     isLogin = _localStorageService.isLogin != null;
+    isAvatarUploaded = _localStorageService.isAvatarUploaded != null;
     if (isLogin) {
       log.d('User is already logged-in');
       await _getUserProfile();
@@ -77,6 +79,13 @@ class FirebaseAuthService {
   /// [_getUserProfile] method is used for getting user profile data.
   _getUserProfile() async {
     userProfile = await _firebaseService.getUserProfile();
+    if (userProfile!.profileImageUrl != null || userProfile!.profileImageUrl == '') {
+      isAvatarUploaded = true;
+      _localStorageService.isAvatarUploaded = true;
+    } else {
+      isAvatarUploaded = false;
+      _localStorageService.isAvatarUploaded = false;
+    }
   }
 
   /// Updating FCM Token here
@@ -202,7 +211,6 @@ class FirebaseAuthService {
   }
 
   /// uploading image to firebase storage
-
 
   /// [signInWithApple] method is used for signup with Apple.
   signInWithApple() async {

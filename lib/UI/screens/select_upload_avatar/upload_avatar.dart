@@ -1,3 +1,4 @@
+import 'package:Quizz/core/enums/view_state.dart';
 import 'package:flutter/material.dart';
 import 'package:Quizz/UI/custom_widget/custom_button.dart';
 import 'package:Quizz/UI/screens/select_upload_avatar/select_avatar_viewmodel.dart';
@@ -38,7 +39,7 @@ class UploadAvatarScreen extends StatelessWidget {
                             fit: BoxFit.scaleDown,
                           ),
                           const Spacer(),
-                          _skipButton(),
+                          _skipButton(model),
                         ],
                       ),
                       42.verticalSpace,
@@ -52,14 +53,14 @@ class UploadAvatarScreen extends StatelessWidget {
                         ),
                       ),
                       75.verticalSpace,
-                      _uploadAvatar(),
+                      _uploadAvatar(model),
                       131.verticalSpace,
-                      GestureDetector(
-                        onTap: () {
-                          // do something
-                        },
-                        child: Align(
-                          alignment: Alignment.center,
+                      Align(
+                        alignment: Alignment.center,
+                        child: GestureDetector(
+                          onTap: () {
+                            Get.back();
+                          },
                           child: Text(
                             'Select your avatar',
                             style: TextStyle(
@@ -74,17 +75,24 @@ class UploadAvatarScreen extends StatelessWidget {
                       ),
                       37.verticalSpace,
                       CustomButton(
-                        titleWidget: const Text(
-                          'Upload',
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 22,
-                            color: Color(0xff4530B2),
-                          ),
-                        ),
+                        titleWidget: model.state == ViewState.busy
+                            ? const CircularProgressIndicator(
+                                color: Color(0xff4530B2),
+                              )
+                            : const Text(
+                                'Upload',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 22,
+                                  color: Color(0xff4530B2),
+                                ),
+                              ),
                         onPressed: () {
-                          // do something
+                          print('upload avatar');
+                          (model.profilePicture == null)
+                              ? Get.snackbar('Error', 'Please upload an image')
+                              : model.uploadAvatar(false);
                         },
                       ),
                     ],
@@ -96,27 +104,48 @@ class UploadAvatarScreen extends StatelessWidget {
     );
   }
 
-  Widget _uploadAvatar() {
+  Widget _uploadAvatar(SelectAvatarViewModel model) {
     return Align(
       alignment: Alignment.center,
-      child: GestureDetector(
-        onTap: () {
-          // do something
-        },
-        child: Image.asset(
-          '${staticImage}avatar.png',
-          height: 185.02.h,
-          width: 176.w,
-          fit: BoxFit.scaleDown,
+      child: SizedBox(
+        height: 185.02.h,
+        width: 176.w,
+        child: Stack(
+          children: [
+            (model.profilePicture == null)
+                ? Image.asset(
+                    '${staticImage}avatar.png',
+                    fit: BoxFit.scaleDown,
+                  )
+                : Container(
+                    decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: FileImage(model.profilePicture!),
+                      fit: BoxFit.cover,
+                    ),
+                  )),
+            Align(
+                alignment: Alignment.bottomRight,
+                child: GestureDetector(
+                  onTap: () {
+                    model.pickMediaFile();
+                  },
+                  child: SvgPicture.asset(
+                    '${staticIcon}camera.svg',
+                    fit: BoxFit.scaleDown,
+                  ),
+                ))
+          ],
         ),
       ),
     );
   }
 
-  GestureDetector _skipButton() {
+  GestureDetector _skipButton(SelectAvatarViewModel model) {
     return GestureDetector(
       onTap: () {
-        // do something
+        model.skipAvatar();
       },
       child: Row(
         children: [

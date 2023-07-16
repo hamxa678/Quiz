@@ -182,7 +182,7 @@ class SignUpScreen extends StatelessWidget {
                           },
                         ),
                         15.verticalSpace,
-                        _dontHaveAccount(),
+                        _haveAnAccount(),
                         25.verticalSpace,
                       ],
                     ),
@@ -196,7 +196,7 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 
-  _dontHaveAccount() {
+  _haveAnAccount() {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Row(
@@ -209,7 +209,8 @@ class SignUpScreen extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Get.to(() => const LoginScreen());
+              Get.back();
+              // Get.to(() => const LoginScreen());
             },
             child: const Text(
               'Login',
