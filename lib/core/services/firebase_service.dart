@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:Quizz/UI/screens/home/home_screen.dart';
 import 'package:Quizz/locator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -64,17 +65,19 @@ class FirebaseService {
     // Save the download URL in Firestore
     await documentReferenceForUser.update({
       'profileImage': downloadURL,
-    }).whenComplete(
-      () => Get.snackbar('Success', 'Image uploaded successfully'),
-    );
+    }).whenComplete(() async {
+      await getUserProfile();
+      Get.off(const HomeScreen());
+    });
   }
 
   avatarUploadSkipped() {
     documentReferenceForUser.update({
       'profileImage': '',
-    }).whenComplete(
-      () => Get.snackbar('Skipped', 'Image uploading skipped'),
-    );
+    }).whenComplete(() async {
+      await getUserProfile();
+      Get.snackbar('Skipped', 'Image uploading skipped');
+    });
     _localStorageService.isAvatarUploaded = true;
   }
 

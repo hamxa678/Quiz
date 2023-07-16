@@ -1,3 +1,4 @@
+import 'package:Quizz/UI/screens/home/home_screen.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:Quizz/UI/custom_widget/dialogbox/network_error_dialog.dart';
@@ -92,7 +93,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (!_FirebaseAuthService.isLogin) {
       Get.off(() => const LoginScreen());
     } else if (_FirebaseAuthService.isAvatarUploaded) {
-      Get.off(() => const RootScreen());
+      Get.off(() => const HomeScreen());
     } else {
       Get.off(() => const SelectAvatarScreen());
     }
