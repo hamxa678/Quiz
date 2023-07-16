@@ -1,6 +1,8 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:Quizz/UI/screens/home/home_screen.dart';
+import 'package:Quizz/core/models/quiz_question_model.dart';
 import 'package:Quizz/locator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -117,6 +119,46 @@ class FirebaseService {
   // Future<AuthResponse?>
   resetPassword(ResetPasswordBody body) async {
     return null;
+  }
+
+  createQuiz(List<QuizQuestionModel> quizQuestionList) async {
+    String randomUid = getRandomUid();
+    // CollectionReference collectionReferenceForQuiz = documentReferenceForUser
+    //     .collection('quiz')
+    //     .doc(randomUid)
+    //     .collection('questions');
+    CollectionReference collectionReferenceForQuiz =
+        _firestore.collection('quizzes').doc(randomUid).collection('questions');
+    quizQuestionList.forEach((element) async {
+      await collectionReferenceForQuiz
+          .doc(quizQuestionList.indexOf(element).toString())
+          .set(
+            element.toMap(),
+            //       {
+            //   'question': element.question,
+            //   'correctOption': element.correctOption,
+            //   'options': element.options!.map((e) => e.option).toList(),
+            // }
+          )
+          .whenComplete(() {
+        quizQuestionList.indexOf(element) == quizQuestionList.length - 1
+            ? {
+                documentReferenceForUser
+                    .collection('quiz')
+                    .add({'quizUID': randomUid}).whenComplete(() {
+                  Get.back();
+                  Get.snackbar('Successful', 'Quiz successfully created');
+                }),
+              }
+            : null;
+      });
+    });
+  }
+
+  String getRandomUid() {
+    return DateTime.now().millisecondsSinceEpoch.toString() +
+        currentUserUID!.substring(0, 6) +
+        (Random().nextInt(9000) + 1000).toString();
   }
 
   // Future<String> uploadImage(File image, String folderName) async {
