@@ -73,7 +73,8 @@ class CreateQuizScreen extends StatelessWidget {
                           ),
                           onPressed: () {
                             if (model.formKey.currentState!.validate()) {
-                              // model.createQuiz();
+                              print('start');
+                              model.createQuiz();
                             }
                           },
                         ),

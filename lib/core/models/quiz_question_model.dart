@@ -16,7 +16,7 @@ class QuizQuestionModel {
     correctOption = json['correctOption'];
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['question'] = question;
     if (options != null) {

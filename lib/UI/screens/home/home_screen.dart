@@ -1,3 +1,4 @@
+import 'package:Quizz/UI/screens/create_quiz/create_quiz_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:Quizz/UI/screens/home/home_screen_viewmodel.dart';
 import 'package:Quizz/core/constants/strings.dart';
@@ -204,7 +205,7 @@ class HomeScreen extends StatelessWidget {
       HomeScreenViewModel model, BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // do something
+        (model.currentIndex == 1) ? Get.to(const CreateQuizScreen()) : null;
       },
       child: Container(
           padding: EdgeInsets.symmetric(vertical: 18.h, horizontal: 24.w),
