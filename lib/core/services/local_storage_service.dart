@@ -9,6 +9,7 @@ class LocalStorageService {
   static const String onboardingCountKey = 'onBoardingCount';
   static const String notificationsCountKey = 'notificationsCount';
   static const String isLoginFlag = 'accessToken';
+  static const String isAvatarUploadedFlag = 'isAvatarUploaded';
   static const String refreshTokenKey = 'refreshToken';
 
   /// Setters and getters
@@ -21,6 +22,10 @@ class LocalStorageService {
 
   dynamic get isLogin => _getFromDisk(isLoginFlag);
   set isLogin(token) => _saveToDisk(isLoginFlag, token);
+
+    dynamic get isAvatarUploaded => _getFromDisk(isAvatarUploadedFlag);
+  set isAvatarUploaded(token) => _saveToDisk(isAvatarUploadedFlag, token);
+  // isAvatarUploaded
 
   dynamic get refreshToken => _getFromDisk(refreshTokenKey);
 

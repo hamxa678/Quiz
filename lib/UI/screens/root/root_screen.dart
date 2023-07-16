@@ -48,6 +48,17 @@ class RootScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    (model.firebaseAuthService.userProfile!.profileImageUrl ==
+                                null ||
+                            model.firebaseAuthService.userProfile!
+                                    .profileImageUrl! ==
+                                '')
+                        ? Image.asset('assets/images/avatar.png')
+                        : Image.network(model
+                            .firebaseAuthService.userProfile!.profileImageUrl!),
+                    // Image.network(model
+                    //     .firebaseAuthService.userProfile!.profileImageUrl!),
+                    20.verticalSpace,
                     Text(
                       '${model.firebaseAuthService.userProfile!.name}',
                     ),

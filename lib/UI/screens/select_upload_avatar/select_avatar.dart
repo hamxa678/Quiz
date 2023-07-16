@@ -1,3 +1,4 @@
+import 'package:Quizz/UI/screens/select_upload_avatar/upload_avatar.dart';
 import 'package:Quizz/core/enums/view_state.dart';
 import 'package:flutter/material.dart';
 import 'package:Quizz/UI/custom_widget/custom_button.dart';
@@ -39,7 +40,7 @@ class SelectAvatarScreen extends StatelessWidget {
                             fit: BoxFit.scaleDown,
                           ),
                           const Spacer(),
-                          _skipButton(),
+                          _skipButton(model),
                         ],
                       ),
                       42.verticalSpace,
@@ -87,14 +88,19 @@ class SelectAvatarScreen extends StatelessWidget {
                         },
                         child: Align(
                           alignment: Alignment.center,
-                          child: Text(
-                            'Upload your avatar',
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18.sp,
-                              color: Colors.white,
+                          child: GestureDetector(
+                            onTap: () {
+                              Get.to(const UploadAvatarScreen());
+                            },
+                            child: Text(
+                              'Upload your avatar',
+                              style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 18.sp,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
@@ -115,7 +121,7 @@ class SelectAvatarScreen extends StatelessWidget {
                                 ),
                               ),
                         onPressed: () {
-                          model.uploadAvatar();
+                          model.uploadAvatar(true);
                           // do something
                         },
                       ),
@@ -128,10 +134,10 @@ class SelectAvatarScreen extends StatelessWidget {
     );
   }
 
-  GestureDetector _skipButton() {
+  GestureDetector _skipButton(SelectAvatarViewModel model) {
     return GestureDetector(
       onTap: () {
-        // do something
+        model.skipAvatar();
       },
       child: Row(
         children: [
