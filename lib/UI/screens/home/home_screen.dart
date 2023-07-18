@@ -120,11 +120,8 @@ class HomeScreen extends StatelessWidget {
             padding: EdgeInsets.fromLTRB(25.w, 0, 25.w, 0),
             itemCount: 5,
             itemBuilder: (context, index) {
-              return _customCard(
-                  'Mobile App Development',
-                  'Wajeeha, Lajeela Sayed, Nimra, Shahirah Ejaz ...',
-                  model,
-                  '');
+              return _customCard('Mobile App Development',
+                  'Wajeeha, Lajeela Sayed', model, '', 'Hamza Khan');
             }),
         StreamBuilder<QuerySnapshot>(
           stream: model.teacherQuizzesStream,
@@ -141,6 +138,7 @@ class HomeScreen extends StatelessWidget {
                       snapshot.data!.docs[index]['description'].toString(),
                       model,
                       snapshot.data!.docs[index]['quizUID'].toString(),
+                      snapshot.data!.docs[index]['authorName'].toString(),
                     );
                   });
             }
@@ -151,7 +149,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   Container _customCard(String title, String description,
-      HomeScreenViewModel model, String quizUID) {
+      HomeScreenViewModel model, String quizUID, String autherName) {
     return Container(
       height: 128.h,
       width: 325.w,
@@ -182,12 +180,24 @@ class HomeScreen extends StatelessWidget {
                       Icon(Icons.more_vert, color: Colors.white, size: 20.sp)),
             ],
           ),
-          Text(description,
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 11.sp,
-                color: Colors.white,
-              )),
+          Row(
+            children: [
+              Text(description,
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 11.sp,
+                    color: Colors.white,
+                  )),
+              // autherName
+              Text(" by $autherName",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'Poppins',
+                    fontSize: 11.sp,
+                    color: Colors.white,
+                  )),
+            ],
+          ),
           const Spacer(),
           Row(
             children: [
