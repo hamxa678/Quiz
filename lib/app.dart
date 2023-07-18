@@ -10,6 +10,7 @@ import 'package:Quizz/core/services/localization_service.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import 'UI/screens/create_quiz/create_quiz_first_sreen.dart';
 import 'UI/screens/home/home_screen.dart';
 
 class MyApp extends StatelessWidget {
@@ -36,7 +37,9 @@ class MyApp extends StatelessWidget {
             // const ResultScreen(),
             // const HomeScreen(),
             // const SignUpScreen()
+
             const SplashScreen(),
+        // const QuizFirstScreen(),
       ),
     );
   }
