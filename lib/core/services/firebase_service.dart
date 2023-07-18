@@ -175,8 +175,10 @@ class FirebaseService {
         .snapshots();
   }
 
-  deleteQuizzes(String quizUID) async {
-    await _firestore.collection('quizzes').doc(quizUID).delete();
+  deleteQuiz(String quizUID) async {
+    await _firestore.collection('quizzes').doc(quizUID).delete().whenComplete(
+        () =>
+            Get.snackbar('Successfully deleted', "Quiz successfully deleted"));
   }
 
   // Future<String> uploadImage(File image, String folderName) async {

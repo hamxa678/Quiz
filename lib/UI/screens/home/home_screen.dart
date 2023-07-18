@@ -120,8 +120,11 @@ class HomeScreen extends StatelessWidget {
             padding: EdgeInsets.fromLTRB(25.w, 0, 25.w, 0),
             itemCount: 5,
             itemBuilder: (context, index) {
-              return _customCard('Mobile App Development',
-                  'Wajeeha, Lajeela Sayed, Nimra, Shahirah Ejaz ...');
+              return _customCard(
+                  'Mobile App Development',
+                  'Wajeeha, Lajeela Sayed, Nimra, Shahirah Ejaz ...',
+                  model,
+                  '');
             }),
         StreamBuilder<QuerySnapshot>(
           stream: model.teacherQuizzesStream,
@@ -134,8 +137,11 @@ class HomeScreen extends StatelessWidget {
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) {
                     return _customCard(
-                        snapshot.data!.docs[index]['title'].toString(),
-                        snapshot.data!.docs[index]['description'].toString());
+                      snapshot.data!.docs[index]['title'].toString(),
+                      snapshot.data!.docs[index]['description'].toString(),
+                      model,
+                      snapshot.data!.docs[index]['quizUID'].toString(),
+                    );
                   });
             }
           },
@@ -144,7 +150,8 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Container _customCard(String title, String description) {
+  Container _customCard(String title, String description,
+      HomeScreenViewModel model, String quizUID) {
     return Container(
       height: 128.h,
       width: 325.w,
@@ -169,7 +176,7 @@ class HomeScreen extends StatelessWidget {
               const Spacer(),
               InkWell(
                   onTap: () {
-                    // do something
+                    model.deleteQuiz(quizUID);
                   },
                   child:
                       Icon(Icons.more_vert, color: Colors.white, size: 20.sp)),
