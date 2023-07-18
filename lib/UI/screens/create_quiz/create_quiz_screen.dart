@@ -1,6 +1,7 @@
 import 'package:Quizz/UI/custom_widget/custom_button.dart';
 import 'package:Quizz/UI/custom_widget/custom_textfield.dart';
 import 'package:Quizz/UI/screens/create_quiz/create_quiz_screen_viewmodel.dart';
+import 'package:Quizz/core/enums/view_state.dart';
 import 'package:flutter/material.dart';
 import 'package:Quizz/core/constants/strings.dart';
 import 'package:flutter_svg/svg.dart';
@@ -67,17 +68,21 @@ class CreateQuizScreen extends StatelessWidget {
                         ),
                         20.verticalSpace,
                         CustomButton(
-                          titleWidget: Text(
-                            'Create Quiz',
-                            style: TextStyle(
-                                color: const Color(0xff4530B2),
-                                fontWeight: FontWeight.w500,
-                                fontFamily: 'Poppins',
-                                fontSize: 20.sp),
-                          ),
+                          titleWidget: model.state == ViewState.busy
+                              ? const CircularProgressIndicator(
+                                  color: Color(0xff4530B2),
+                                )
+                              : Text(
+                                  'Create Quiz',
+                                  style: TextStyle(
+                                      color: const Color(0xff4530B2),
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: 'Poppins',
+                                      fontSize: 20.sp),
+                                ),
                           onPressed: () {
                             if (model.formKey.currentState!.validate()) {
-                              model.createQuiz(title,description);
+                              model.createQuiz(title, description);
                             }
                           },
                         ),
