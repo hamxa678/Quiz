@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../create_quiz/create_quiz_first_sreen.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
   @override
@@ -205,7 +207,8 @@ class HomeScreen extends StatelessWidget {
       HomeScreenViewModel model, BuildContext context) {
     return GestureDetector(
       onTap: () {
-        (model.currentIndex == 1) ? Get.to(const CreateQuizScreen()) : null;
+        (model.currentIndex == 1) ? Get.to(const QuizFirstScreen()) : null;
+        // Get.to(const CreateQuizScreen()) : null;
       },
       child: Container(
           padding: EdgeInsets.symmetric(vertical: 18.h, horizontal: 24.w),
