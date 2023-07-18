@@ -3,7 +3,6 @@ import 'package:Quizz/core/others/base_view_model.dart';
 import 'package:Quizz/core/services/firebase_service.dart';
 import 'package:Quizz/locator.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class CreateQuizScreenViewModel extends BaseViewModel {
   final firebaseService = locator<FirebaseService>();
@@ -11,6 +10,8 @@ class CreateQuizScreenViewModel extends BaseViewModel {
     QuizQuestionModel(options: [Options()], correctOption: 1)
   ];
   final formKey = GlobalKey<FormState>();
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
   // int numberOfQuestion = 1;
 
   incrementQuestion() {
@@ -39,7 +40,7 @@ class CreateQuizScreenViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  createQuiz() async {
-    await firebaseService.createQuiz(quizQuestionList);
+  createQuiz(String title, String description) async {
+    await firebaseService.createQuiz(quizQuestionList, title, description);
   }
 }

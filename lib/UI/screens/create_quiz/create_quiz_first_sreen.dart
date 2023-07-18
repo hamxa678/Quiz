@@ -53,16 +53,26 @@ class QuizFirstScreen extends StatelessWidget {
                               fontSize: 20.sp)),
                       36.verticalSpace,
                       CustomTextField(
+                        validator: (value) =>
+                            value!.isEmpty ? 'Enter title' : null,
+                        controller: model.titleController,
                         hintText: 'Add title',
                       ),
                       20.verticalSpace,
                       CustomTextField(
+                        validator: (value) =>
+                            value!.isEmpty ? 'Enter description' : null,
+                        controller: model.descriptionController,
                         hintText: 'Add description',
                       ),
                       36.verticalSpace,
                       CustomButton(
                         onPressed: () {
-                          Get.to(const CreateQuizScreen());
+                          if (model.formKey.currentState!.validate()) {
+                            Get.to(CreateQuizScreen(
+                                title: model.titleController.text,
+                                description: model.descriptionController.text));
+                          }
                         },
                         titleWidget: Text('Next',
                             style: TextStyle(
