@@ -126,7 +126,7 @@ class FirebaseService {
     String randomUid = getRandomUid();
     DocumentReference documentReferenceForQuiz =
         _firestore.collection('quizzes').doc(randomUid);
-    documentReferenceForQuiz.set({
+    await documentReferenceForQuiz.set({
       'title': title,
       'description': description,
       'quizUID': randomUid,
@@ -147,10 +147,10 @@ class FirebaseService {
             //   'options': element.options!.map((e) => e.option).toList(),
             // }
           )
-          .whenComplete(() {
+          .whenComplete(() async {
         quizQuestionList.indexOf(element) == quizQuestionList.length - 1
             ? {
-                documentReferenceForUser
+                await documentReferenceForUser
                     .collection('quiz')
                     .add({'quizUID': randomUid}).whenComplete(() {
                   Get.offAll(const HomeScreen());
@@ -166,6 +166,17 @@ class FirebaseService {
     return DateTime.now().millisecondsSinceEpoch.toString() +
         currentUserUID!.substring(0, 6) +
         (Random().nextInt(9000) + 1000).toString();
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getQuizzesStreamForTeacher() {
+    return _firestore
+        .collection('quizzes')
+        .where('createdBy', isEqualTo: currentUserUID)
+        .snapshots();
+  }
+
+  deleteQuizzes(String quizUID) async {
+    await _firestore.collection('quizzes').doc(quizUID).delete();
   }
 
   // Future<String> uploadImage(File image, String folderName) async {

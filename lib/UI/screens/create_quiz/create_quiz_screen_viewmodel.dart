@@ -1,3 +1,4 @@
+import 'package:Quizz/core/enums/view_state.dart';
 import 'package:Quizz/core/models/quiz_question_model.dart';
 import 'package:Quizz/core/others/base_view_model.dart';
 import 'package:Quizz/core/services/firebase_service.dart';
@@ -41,6 +42,8 @@ class CreateQuizScreenViewModel extends BaseViewModel {
   }
 
   createQuiz(String title, String description) async {
+    setState(ViewState.busy);
     await firebaseService.createQuiz(quizQuestionList, title, description);
+    setState(ViewState.idle);
   }
 }

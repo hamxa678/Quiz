@@ -1,4 +1,5 @@
 import 'package:Quizz/UI/screens/create_quiz/create_quiz_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:Quizz/UI/screens/home/home_screen_viewmodel.dart';
 import 'package:Quizz/core/constants/strings.dart';
@@ -100,7 +101,7 @@ class HomeScreen extends StatelessWidget {
                                       25.verticalSpace,
                                     ],
                                   )),
-                              _tabBarView()
+                              _tabBarView(model)
                             ],
                           ),
                         ),
@@ -112,26 +113,38 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _tabBarView() {
+  Widget _tabBarView(HomeScreenViewModel model) {
     return Expanded(
       child: TabBarView(children: [
         ListView.builder(
             padding: EdgeInsets.fromLTRB(25.w, 0, 25.w, 0),
             itemCount: 5,
             itemBuilder: (context, index) {
-              return _customCard();
+              return _customCard('Mobile App Development',
+                  'Wajeeha, Lajeela Sayed, Nimra, Shahirah Ejaz ...');
             }),
-        ListView.builder(
-            padding: EdgeInsets.fromLTRB(25.w, 0, 25.w, 0),
-            itemCount: 2,
-            itemBuilder: (context, index) {
-              return _customCard();
-            }),
+        StreamBuilder<QuerySnapshot>(
+          stream: model.teacherQuizzesStream,
+          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else {
+              return ListView.builder(
+                  padding: EdgeInsets.fromLTRB(25.w, 0, 25.w, 0),
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (context, index) {
+                    return _customCard(
+                        snapshot.data!.docs[index]['title'].toString(),
+                        snapshot.data!.docs[index]['description'].toString());
+                  });
+            }
+          },
+        ),
       ]),
     );
   }
 
-  Container _customCard() {
+  Container _customCard(String title, String description) {
     return Container(
       height: 128.h,
       width: 325.w,
@@ -146,7 +159,7 @@ class HomeScreen extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text('Mobile App Development',
+              Text(title,
                   style: TextStyle(
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w600,
@@ -162,7 +175,7 @@ class HomeScreen extends StatelessWidget {
                       Icon(Icons.more_vert, color: Colors.white, size: 20.sp)),
             ],
           ),
-          Text('Wajeeha, Lajeela Sayed, Nimra, Shahirah Ejaz ...',
+          Text(description,
               style: TextStyle(
                 fontFamily: 'Poppins',
                 fontSize: 11.sp,
