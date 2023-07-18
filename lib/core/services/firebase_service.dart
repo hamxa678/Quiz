@@ -132,6 +132,7 @@ class FirebaseService {
       'quizUID': randomUid,
       'createdBy': currentUserUID,
       'createdAt': DateTime.now(),
+      'authorName': userProfile.name,
     });
 
     CollectionReference collectionReferenceForQuiz =
