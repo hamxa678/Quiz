@@ -121,14 +121,21 @@ class FirebaseService {
     return null;
   }
 
-  createQuiz(List<QuizQuestionModel> quizQuestionList) async {
+  createQuiz(List<QuizQuestionModel> quizQuestionList, String title,
+      String description) async {
     String randomUid = getRandomUid();
-    // CollectionReference collectionReferenceForQuiz = documentReferenceForUser
-    //     .collection('quiz')
-    //     .doc(randomUid)
-    //     .collection('questions');
+    DocumentReference documentReferenceForQuiz =
+        _firestore.collection('quizzes').doc(randomUid);
+    documentReferenceForQuiz.set({
+      'title': title,
+      'description': description,
+      'quizUID': randomUid,
+      'createdBy': currentUserUID,
+      'createdAt': DateTime.now(),
+    });
+
     CollectionReference collectionReferenceForQuiz =
-        _firestore.collection('quizzes').doc(randomUid).collection('questions');
+        documentReferenceForQuiz.collection('questions');
     quizQuestionList.forEach((element) async {
       await collectionReferenceForQuiz
           .doc(quizQuestionList.indexOf(element).toString())
@@ -146,7 +153,7 @@ class FirebaseService {
                 documentReferenceForUser
                     .collection('quiz')
                     .add({'quizUID': randomUid}).whenComplete(() {
-                  Get.back();
+                  Get.offAll(const HomeScreen());
                   Get.snackbar('Successful', 'Quiz successfully created');
                 }),
               }

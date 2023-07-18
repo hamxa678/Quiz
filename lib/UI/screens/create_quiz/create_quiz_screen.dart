@@ -8,7 +8,11 @@ import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CreateQuizScreen extends StatelessWidget {
-  const CreateQuizScreen({Key? key}) : super(key: key);
+  final String title;
+  final String description;
+  const CreateQuizScreen(
+      {Key? key, required this.title, required this.description})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -73,8 +77,7 @@ class CreateQuizScreen extends StatelessWidget {
                           ),
                           onPressed: () {
                             if (model.formKey.currentState!.validate()) {
-                              print('start');
-                              model.createQuiz();
+                              model.createQuiz(title,description);
                             }
                           },
                         ),
