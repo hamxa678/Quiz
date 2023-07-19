@@ -1,15 +1,22 @@
 import 'package:Quizz/UI/custom_widget/custom_button.dart';
 import 'package:Quizz/UI/custom_widget/custom_textfield.dart';
 import 'package:Quizz/UI/screens/create_quiz/create_quiz_screen_viewmodel.dart';
+import 'package:Quizz/UI/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:Quizz/core/constants/strings.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class QuizCompleteScreen extends StatelessWidget {
-  const QuizCompleteScreen({Key? key}) : super(key: key);
+  final String quizUID;
+  final String authorName;
+  const QuizCompleteScreen(
+      {Key? key, required this.quizUID, required this.authorName})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -43,7 +50,7 @@ class QuizCompleteScreen extends StatelessWidget {
                               fontSize: 34.sp)),
                       8.verticalSpace,
                       Text(
-                          'Hamza Khan, You have successfully created a quiz. Kindly share the following QC with your students to join.',
+                          '$authorName, You have successfully created a quiz. Kindly share the following QC with your students to join.',
                           textAlign: TextAlign.justify,
                           style: TextStyle(
                               color: const Color(0xffFFFFFF),
@@ -54,7 +61,7 @@ class QuizCompleteScreen extends StatelessWidget {
                       CustomTextField(
                         readOnly: true,
                         controller: TextEditingController(
-                          text: 'DJKAS7587',
+                          text: quizUID,
                         ),
                         prefexIcon: SvgPicture.asset(
                           '${staticIcon}QC.svg',
@@ -65,8 +72,7 @@ class QuizCompleteScreen extends StatelessWidget {
                         hintText: 'Quiz code',
                         suffixIcon: GestureDetector(
                             onTap: () {
-                              Clipboard.setData(
-                                  ClipboardData(text: 'DJKAS7587'));
+                              Clipboard.setData(ClipboardData(text: quizUID));
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                   content: Text('Copied to Clipboard'),
@@ -79,7 +85,7 @@ class QuizCompleteScreen extends StatelessWidget {
                       36.verticalSpace,
                       CustomButton(
                         onPressed: () {
-                          // do something
+                          Get.offAll(const HomeScreen());
                         },
                         titleWidget: Text('Done',
                             style: TextStyle(
