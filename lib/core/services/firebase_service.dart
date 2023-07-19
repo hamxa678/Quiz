@@ -155,7 +155,7 @@ class FirebaseService {
                 await documentReferenceForUser
                     .collection('quiz')
                     .add({'quizUID': randomUid}).whenComplete(() {
-                  Get.offAll(QuizCompleteScreen(
+                  Get.off(QuizCompleteScreen(
                       quizUID: randomUid, authorName: userProfile.name!));
                   Get.snackbar('Successful', 'Quiz successfully created');
                 }),
@@ -179,17 +179,30 @@ class FirebaseService {
   }
 
   deleteQuiz(String quizUID) async {
-    await _firestore.collection('quizzes').doc(quizUID).delete().whenComplete(
-        () =>
-            Get.snackbar('Successfully deleted', "Quiz successfully deleted"));
+    // Get a reference to the "quizzes" document
+    final quizDocRef = _firestore.collection('quizzes').doc(quizUID);
+
+    // Get a reference to the "questions" subcollection
+    final questionsColRef = quizDocRef.collection('questions');
+
+    try {
+      // Delete all documents in the "questions" subcollection
+      final questionsSnapshot = await questionsColRef.get();
+      for (final doc in questionsSnapshot.docs) {
+        await doc.reference.delete();
+      }
+
+      // Delete the "quizzes" document
+      await quizDocRef.delete();
+
+      // Show a success message after successful deletion
+      Get.snackbar(
+          'Successfully deleted', "Quiz and questions successfully deleted");
+    } catch (e) {
+      // Handle any errors that might occur during deletion
+      print("Error deleting quiz and questions: $e");
+      Get.snackbar(
+          'Error', 'An error occurred while deleting the quiz and questions.');
+    }
   }
-
-  // Future<String> uploadImage(File image, String folderName) async {
-
-  //   return
-  // }
-
-  // uploadImageToFirebaseStorage(String filePath) async {
-  //   return null;
-  // }
 }

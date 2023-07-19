@@ -1,3 +1,4 @@
+import 'package:Quizz/UI/screens/create_quiz/quiz_complete_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:Quizz/UI/screens/home/home_screen_viewmodel.dart';
@@ -119,8 +120,13 @@ class HomeScreen extends StatelessWidget {
             padding: EdgeInsets.fromLTRB(25.w, 0, 25.w, 0),
             itemCount: 5,
             itemBuilder: (context, index) {
-              return _customCard('Mobile App Development',
-                  'Wajeeha, Lajeela Sayed', model, '', 'Hamza Khan');
+              return _customCard(
+                  'Mobile App Development',
+                  'Wajeeha, Lajeela Sayed',
+                  model,
+                  '',
+                  'Hamza Khan',
+                  Timestamp.now());
             }),
         StreamBuilder<QuerySnapshot>(
           stream: model.teacherQuizzesStream,
@@ -128,18 +134,30 @@ class HomeScreen extends StatelessWidget {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             } else {
-              return ListView.builder(
-                  padding: EdgeInsets.fromLTRB(25.w, 0, 25.w, 0),
-                  itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (context, index) {
-                    return _customCard(
-                      snapshot.data!.docs[index]['title'].toString(),
-                      snapshot.data!.docs[index]['description'].toString(),
-                      model,
-                      snapshot.data!.docs[index]['quizUID'].toString(),
-                      snapshot.data!.docs[index]['authorName'].toString(),
-                    );
-                  });
+              return (snapshot.data!.size == 0)
+                  ? const Center(
+                      child: Text(
+                        'No Quizzes',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w500),
+                      ),
+                    )
+                  : ListView.builder(
+                      padding: EdgeInsets.fromLTRB(25.w, 0, 25.w, 0),
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        return _customCard(
+                          snapshot.data!.docs[index]['title'].toString(),
+                          snapshot.data!.docs[index]['description'].toString(),
+                          model,
+                          snapshot.data!.docs[index]['quizUID'].toString(),
+                          snapshot.data!.docs[index]['authorName'].toString(),
+                          snapshot.data!.docs[index]['createdAt'],
+                        );
+                      });
             }
           },
         ),
@@ -147,87 +165,108 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Container _customCard(String title, String description,
-      HomeScreenViewModel model, String quizUID, String autherName) {
-    return Container(
-      height: 128.h,
-      width: 325.w,
-      margin: EdgeInsets.only(bottom: 16.h),
-      padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
-      decoration: BoxDecoration(
-        color: const Color(0xff6F6CE0),
-        borderRadius: BorderRadius.circular(6.r),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Text(title,
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18.sp,
-                    color: Colors.white,
-                  )),
-              const Spacer(),
-              InkWell(
-                  onTap: () {
-                    model.deleteQuiz(quizUID);
-                  },
-                  child:
-                      Icon(Icons.more_vert, color: Colors.white, size: 20.sp)),
-            ],
-          ),
-          Row(
-            children: [
-              Text('"$description"',
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 11.sp,
-                    color: Colors.white,
-                  )),
-              // autherName
-              Text(" created by $autherName",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontFamily: 'Poppins',
-                    fontSize: 11.sp,
-                    color: Colors.white,
-                  )),
-            ],
-          ),
-          const Spacer(),
-          Row(
-            children: [
-              SizedBox(
-                width: 65.w,
-                child: Stack(
-                  children: [
-                    Image.asset('${staticImage}ava1.png',
-                        height: 25.h, width: 25.w, fit: BoxFit.scaleDown),
-                    Positioned(
-                      left: 18.w,
-                      child: Image.asset('${staticImage}ava2.png',
+  Widget _customCard(
+      String title,
+      String description,
+      HomeScreenViewModel model,
+      String quizUID,
+      String autherName,
+      Timestamp createdAt) {
+    return GestureDetector(
+      onTap: () {
+        (model.currentIndex == 1)
+            ? Get.to(
+                QuizCompleteScreen(quizUID: quizUID, authorName: autherName))
+            : null;
+      },
+      child: Container(
+        height: 128.h,
+        width: 325.w,
+        margin: EdgeInsets.only(bottom: 16.h),
+        padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
+        decoration: BoxDecoration(
+          color: const Color(0xff6F6CE0),
+          borderRadius: BorderRadius.circular(6.r),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Text(title,
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18.sp,
+                      color: Colors.white,
+                    )),
+                const Spacer(),
+                InkWell(
+                    onTap: () {
+                      model.deleteQuiz(quizUID);
+                    },
+                    child: Icon(Icons.more_vert,
+                        color: Colors.white, size: 20.sp)),
+              ],
+            ),
+            Row(
+              children: [
+                Text('"$description"',
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 11.sp,
+                      color: Colors.white,
+                    )),
+                // autherName
+                Text(" created by $autherName",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontFamily: 'Poppins',
+                      fontSize: 11.sp,
+                      color: Colors.white,
+                    )),
+              ],
+            ),
+            const Spacer(),
+            Row(
+              children: [
+                SizedBox(
+                  width: 65.w,
+                  child: Stack(
+                    children: [
+                      Image.asset('${staticImage}ava1.png',
                           height: 25.h, width: 25.w, fit: BoxFit.scaleDown),
-                    ),
-                    Positioned(
-                      left: (18 * 2).w,
-                      child: Image.asset('${staticImage}ava3.png',
-                          height: 25.h, width: 25.w, fit: BoxFit.scaleDown),
-                    ),
-                  ],
+                      Positioned(
+                        left: 18.w,
+                        child: Image.asset('${staticImage}ava2.png',
+                            height: 25.h, width: 25.w, fit: BoxFit.scaleDown),
+                      ),
+                      Positioned(
+                        left: (18 * 2).w,
+                        child: Image.asset('${staticImage}ava3.png',
+                            height: 25.h, width: 25.w, fit: BoxFit.scaleDown),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Text('+ 5 more',
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 11.sp,
-                    color: Colors.white,
-                  ))
-            ],
-          )
-        ],
+                Text('+ 5 more',
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 11.sp,
+                      color: Colors.white,
+                    )),
+                const Spacer(),
+                Text(
+                    'Created on ${createdAt.toDate().day}/${createdAt.toDate().month}/${createdAt.toDate().year}',
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 11.sp,
+                      color: Colors.white,
+                    )),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
