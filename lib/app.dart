@@ -11,6 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'UI/screens/create_quiz/create_quiz_first_sreen.dart';
+// import 'UI/screens/create_quiz/qc_finalscreen.dart';
 import 'UI/screens/home/home_screen.dart';
 
 class MyApp extends StatelessWidget {
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
             // const ResultScreen(),
             // const HomeScreen(),
             // const SignUpScreen()
-
+            // const QuizCompleteScreen(),
             const SplashScreen(),
         // const QuizFirstScreen(),
       ),

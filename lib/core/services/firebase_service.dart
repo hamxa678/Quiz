@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:Quizz/UI/screens/create_quiz/quiz_complete_screen.dart';
 import 'package:Quizz/UI/screens/home/home_screen.dart';
 import 'package:Quizz/core/models/quiz_question_model.dart';
 import 'package:Quizz/locator.dart';
@@ -154,7 +155,8 @@ class FirebaseService {
                 await documentReferenceForUser
                     .collection('quiz')
                     .add({'quizUID': randomUid}).whenComplete(() {
-                  Get.offAll(const HomeScreen());
+                  Get.offAll(QuizCompleteScreen(
+                      quizUID: randomUid, authorName: userProfile.name!));
                   Get.snackbar('Successful', 'Quiz successfully created');
                 }),
               }

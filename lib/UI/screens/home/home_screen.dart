@@ -1,4 +1,3 @@
-import 'package:Quizz/UI/screens/create_quiz/create_quiz_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:Quizz/UI/screens/home/home_screen_viewmodel.dart';
@@ -182,14 +181,14 @@ class HomeScreen extends StatelessWidget {
           ),
           Row(
             children: [
-              Text(description,
+              Text('"$description"',
                   style: TextStyle(
                     fontFamily: 'Poppins',
                     fontSize: 11.sp,
                     color: Colors.white,
                   )),
               // autherName
-              Text(" by $autherName",
+              Text(" created by $autherName",
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontFamily: 'Poppins',
@@ -322,7 +321,7 @@ class HomeScreen extends StatelessWidget {
                   border: Border.all(color: Colors.white, width: 2.w),
                   image: const DecorationImage(
                     image: AssetImage('assets/images/avatar.png'),
-                    fit: BoxFit.scaleDown,
+                    fit: BoxFit.cover,
                   ),
                 ),
               )
@@ -335,7 +334,7 @@ class HomeScreen extends StatelessWidget {
                   image: DecorationImage(
                     image: NetworkImage(
                         model.firebaseService.userProfile.profileImageUrl!),
-                    fit: BoxFit.scaleDown,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
