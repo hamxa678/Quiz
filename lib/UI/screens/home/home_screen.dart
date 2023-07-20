@@ -192,6 +192,7 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(title,
                     style: TextStyle(
@@ -201,6 +202,30 @@ class HomeScreen extends StatelessWidget {
                       color: Colors.white,
                     )),
                 const Spacer(),
+                giContainer(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white, width: 2.w),
+                  ),
+                  child: DropdownButton<String>(
+                    value: null,
+                    icon: const Icon(
+                      Icons.more_vert,
+                      color: Colors.white,
+                    ),
+                    iconSize: 20.sp,
+                    underline: Container(),
+                    onChanged: (String? value) {
+                      // This is called when the user selects an item.
+                    },
+                    items: model.list
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ),
                 InkWell(
                     onTap: () {
                       model.deleteQuiz(quizUID);
