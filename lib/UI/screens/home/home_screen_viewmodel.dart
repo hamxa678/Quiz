@@ -13,7 +13,7 @@ class HomeScreenViewModel extends BaseViewModel {
   FirebaseAuthService firebaseAuthService = locator<FirebaseAuthService>();
   FirebaseService firebaseService = locator<FirebaseService>();
   int currentIndex = 0;
-  List<String> list = <String>['One', 'Two', 'Three', 'Four'];
+  List<String> list = <String>['Edit', 'Delete'];
 
   getTeacherQuizzes() {
     teacherQuizzesStream = firebaseService.getQuizzesStreamForTeacher();
