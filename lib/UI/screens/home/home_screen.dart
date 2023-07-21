@@ -126,7 +126,8 @@ class HomeScreen extends StatelessWidget {
                   model,
                   '',
                   'Hamza Khan',
-                  Timestamp.now());
+                  Timestamp.now(),
+                  context);
             }),
         StreamBuilder<QuerySnapshot>(
           stream: model.teacherQuizzesStream,
@@ -156,6 +157,7 @@ class HomeScreen extends StatelessWidget {
                           snapshot.data!.docs[index]['quizUID'].toString(),
                           snapshot.data!.docs[index]['authorName'].toString(),
                           snapshot.data!.docs[index]['createdAt'],
+                          context,
                         );
                       });
             }
@@ -171,7 +173,8 @@ class HomeScreen extends StatelessWidget {
       HomeScreenViewModel model,
       String quizUID,
       String autherName,
-      Timestamp createdAt) {
+      Timestamp createdAt,
+      BuildContext context) {
     return GestureDetector(
       onTap: () {
         (model.currentIndex == 1)
@@ -202,33 +205,33 @@ class HomeScreen extends StatelessWidget {
                       color: Colors.white,
                     )),
                 const Spacer(),
-                giContainer(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white, width: 2.w),
-                  ),
-                  child: DropdownButton<String>(
-                    value: null,
-                    icon: const Icon(
-                      Icons.more_vert,
-                      color: Colors.white,
-                    ),
-                    iconSize: 20.sp,
-                    underline: Container(),
-                    onChanged: (String? value) {
-                      // This is called when the user selects an item.
-                    },
-                    items: model.list
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  ),
-                ),
+                // Container(
+                //   decoration: BoxDecoration(
+                //     border: Border.all(color: Colors.white, width: 2.w),
+                //   ),
+                //   child: DropdownButton<String>(
+                //     elevation: 0,
+                //     padding: EdgeInsets.zero,
+                //     icon:
+                //         Icon(Icons.more_vert, color: Colors.white, size: 20.sp),
+                //     value: null,
+                //     underline: Container(),
+                //     onChanged: (String? value) {
+                //       // This is called when the user selects an item.
+                //     },
+                //     items: model.list
+                //         .map<DropdownMenuItem<String>>((String value) {
+                //       return DropdownMenuItem<String>(
+                //         value: value,
+                //         child: Text(value),
+                //       );
+                //     }).toList(),
+                //   ),
+                // ),
                 InkWell(
                     onTap: () {
-                      model.deleteQuiz(quizUID);
+                      showDropdownMenu(context, model.list, model, quizUID);
+                      // model.deleteQuiz(quizUID);
                     },
                     child: Icon(Icons.more_vert,
                         color: Colors.white, size: 20.sp)),
@@ -293,6 +296,47 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void showDropdownMenu(BuildContext context, List<String> dropdownItems,
+      HomeScreenViewModel model, String quizUID) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: SizedBox(
+            width: 200.w,
+            // You can adjust the width as needed
+            child: DropdownButton(
+              isExpanded: true,
+              elevation: 0,
+              underline: const SizedBox(),
+              hint: const Text(
+                'Select Item',
+                style: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18,
+                  color: Color(0xff4530B2),
+                ),
+              ),
+              onChanged: (newValue) {
+                if (newValue == 'Delete') {
+                  model.deleteQuiz(quizUID);
+                  Navigator.of(context).pop();
+                } // Close the dropdown menu
+              },
+              items: dropdownItems.map((item) {
+                return DropdownMenuItem(
+                  value: item,
+                  child: Text(item),
+                );
+              }).toList(),
+            ),
+          ),
+        );
+      },
     );
   }
 
