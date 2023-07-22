@@ -178,6 +178,14 @@ class FirebaseService {
         .snapshots();
   }
 
+  getQuizQuestions(String quizUID) async {
+    return await _firestore
+        .collection('quizzes')
+        .doc(quizUID)
+        .collection('questions')
+        .get();
+  }
+
   deleteQuiz(String quizUID) async {
     // Get a reference to the "quizzes" document
     final quizDocRef = _firestore.collection('quizzes').doc(quizUID);
