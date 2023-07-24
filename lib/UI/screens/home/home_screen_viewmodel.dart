@@ -25,11 +25,11 @@ class HomeScreenViewModel extends BaseViewModel {
     setState(ViewState.idle);
   }
 
-  getQuizQuestions(String quizId) async {
-    setState(ViewState.busy);
-    await firebaseService.getQuizQuestions(quizId);
-    setState(ViewState.idle);
-  }
+  // getQuizQuestions(String quizId) async {
+  //   setState(ViewState.busy);
+  //   await firebaseService.getQuizQuestions(quizId);
+  //   setState(ViewState.idle);
+  // }
 
   updateIndex(int index) {
     currentIndex = index;

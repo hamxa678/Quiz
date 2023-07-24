@@ -62,8 +62,9 @@ class JoinQuizScreen extends StatelessWidget {
                       CustomButton(
                         onPressed: () {
                           if (model.formKey.currentState!.validate()) {
-                            
-                            Get.to(() => const JoinedQuizScreen());
+                            model.getQuizQuestion();
+
+                            // Get.to(() => const JoinedQuizScreen());
                             // Get.to(CreateQuizScreen(
                             //     title: model.titleController.text,
                             //     description: model.descriptionController.text)

@@ -38,7 +38,7 @@ class JoinedQuizScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _appBar(),
+                        _appBar(model),
                         59.verticalSpace,
                         Expanded(
                           child: ListView.builder(
@@ -145,7 +145,7 @@ class JoinedQuizScreen extends StatelessWidget {
     );
   }
 
-  Widget _appBar() {
+  Widget _appBar(JoinQuizScreenViewModel model) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -154,7 +154,7 @@ class JoinedQuizScreen extends StatelessWidget {
           fit: BoxFit.scaleDown,
         ),
         51.horizontalSpace,
-        Text('Create Quiz',
+        Text(model.quizResponse!.title!,
             style: TextStyle(
                 color: const Color(0xffFFFFFF),
                 fontWeight: FontWeight.w600,
