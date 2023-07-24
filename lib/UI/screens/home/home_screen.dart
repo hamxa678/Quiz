@@ -1,4 +1,5 @@
 import 'package:Quizz/UI/screens/create_quiz/quiz_complete_screen.dart';
+import 'package:Quizz/UI/screens/join_quiz/join_quizz_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:Quizz/UI/screens/home/home_screen_viewmodel.dart';
@@ -344,7 +345,10 @@ class HomeScreen extends StatelessWidget {
       HomeScreenViewModel model, BuildContext context) {
     return GestureDetector(
       onTap: () {
-        (model.currentIndex == 1) ? Get.to(const QuizFirstScreen()) : null;
+        (model.currentIndex == 1)
+            ? Get.to(const QuizFirstScreen())
+            : Get.to(() => JoinQuizScreen(
+                userName: model.firebaseService.userProfile.name!));
         // Get.to(const CreateQuizScreen()) : null;
       },
       child: Container(
