@@ -1,6 +1,7 @@
 import 'package:Quizz/UI/custom_widget/custom_button.dart';
 import 'package:Quizz/UI/custom_widget/custom_textfield.dart';
 import 'package:Quizz/UI/screens/join_quiz/join_quizz_screen_viewmodel.dart';
+import 'package:Quizz/UI/screens/join_quiz/joined_quiz_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:Quizz/core/constants/strings.dart';
 import 'package:flutter_svg/svg.dart';
@@ -61,6 +62,8 @@ class JoinQuizScreen extends StatelessWidget {
                       CustomButton(
                         onPressed: () {
                           if (model.formKey.currentState!.validate()) {
+                            
+                            Get.to(() => const JoinedQuizScreen());
                             // Get.to(CreateQuizScreen(
                             //     title: model.titleController.text,
                             //     description: model.descriptionController.text)
