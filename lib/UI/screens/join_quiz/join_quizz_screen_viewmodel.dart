@@ -24,7 +24,8 @@ class JoinQuizScreenViewModel extends BaseViewModel {
       notifyListeners();
     }).whenComplete(() {
       Get.snackbar("Success", 'Quiz joined successfully');
-      print("Title :: ${quizResponse!.title}");
+      Get.off(const JoinedQuizScreen());
+      qcController.clear();
     });
     notifyListeners();
     setState(ViewState.idle);
