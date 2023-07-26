@@ -15,11 +15,7 @@ class JoinQuizScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return
-        // ChangeNotifierProvider(
-        //     create: (context) => JoinQuizScreenViewModel(),
-        //     child:
-        Consumer<JoinQuizScreenViewModel>(
+    return Consumer<JoinQuizScreenViewModel>(
       builder: (_, model, child) => Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
@@ -66,7 +62,6 @@ class JoinQuizScreen extends StatelessWidget {
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         await model.getQuizQuestion();
-                        Get.to(const JoinedQuizScreen());
 
                         // Get.to(() => const JoinedQuizScreen());
                         // Get.to(CreateQuizScreen(
@@ -88,7 +83,6 @@ class JoinQuizScreen extends StatelessWidget {
           ),
         ),
       ),
-      // )
     );
   }
 

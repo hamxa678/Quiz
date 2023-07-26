@@ -4,6 +4,7 @@ import 'package:Quizz/core/enums/view_state.dart';
 import 'package:flutter/material.dart';
 import 'package:Quizz/core/constants/strings.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -16,72 +17,96 @@ class JoinedQuizScreen extends StatelessWidget {
         length: 2,
         initialIndex: 0,
         child: Consumer<JoinQuizScreenViewModel>(
-          builder: (context, model, child) => Scaffold(
-            backgroundColor: Colors.white,
-            body: SingleChildScrollView(
-              child: Container(
-                height: 1.sh,
-                width: 1.sw,
-                padding: EdgeInsets.fromLTRB(25.w, 65.h, 25.w, 0),
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('${staticImage}Background.png'),
-                    fit: BoxFit.cover,
+          builder: (context, model, child) => WillPopScope(
+            onWillPop: () async {
+              final status = await Get.dialog(AlertDialog(
+                title: const Text('Caution!'),
+                content: const Text('Are you sure you want to exit the quiz?'),
+                actions: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Get.back(result: true);
+                    },
+                    child: const Text('Yes'),
                   ),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _appBar(model),
-                    59.verticalSpace,
-                    Expanded(
-                      child: ListView.builder(
-                        padding: EdgeInsets.only(bottom: 20.h),
-                        shrinkWrap: true,
-                        itemCount: 3,
-                        itemBuilder: (context, index) =>
-                            _question(index + 1, model),
-                        // {
-                        //   if (index < model.quizQuestionList.length) {
-                        //     return _question(index + 1, model);
-                        //   } else {
-                        //     return GestureDetector(
-                        //       onTap: () {
-                        //         model.incrementQuestion();
-                        //       },
-                        //       child: Text('+ Add question',
-                        //           style: TextStyle(
-                        //               color: const Color(0xffFFFFFF),
-                        //               fontWeight: FontWeight.w500,
-                        //               fontFamily: 'Poppins',
-                        //               fontSize: 20.sp)),
-                        //     );
-                        //   }
-                        // },
+                  ElevatedButton(
+                    onPressed: () {
+                      Get.back(result: false);
+                    },
+                    child: const Text('No'),
+                  ),
+                ],
+              ));
+
+              return status;
+            },
+            child: Scaffold(
+              backgroundColor: Colors.white,
+              body: SingleChildScrollView(
+                child: Container(
+                  height: 1.sh,
+                  width: 1.sw,
+                  padding: EdgeInsets.fromLTRB(25.w, 65.h, 25.w, 0),
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('${staticImage}Background.png'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _appBar(model),
+                      59.verticalSpace,
+                      Expanded(
+                        child: ListView.builder(
+                          padding: EdgeInsets.only(bottom: 20.h),
+                          shrinkWrap: true,
+                          itemCount: 3,
+                          itemBuilder: (context, index) =>
+                              _question(index + 1, model),
+                          // {
+                          //   if (index < model.quizQuestionList.length) {
+                          //     return _question(index + 1, model);
+                          //   } else {
+                          //     return GestureDetector(
+                          //       onTap: () {
+                          //         model.incrementQuestion();
+                          //       },
+                          //       child: Text('+ Add question',
+                          //           style: TextStyle(
+                          //               color: const Color(0xffFFFFFF),
+                          //               fontWeight: FontWeight.w500,
+                          //               fontFamily: 'Poppins',
+                          //               fontSize: 20.sp)),
+                          //     );
+                          //   }
+                          // },
+                        ),
                       ),
-                    ),
-                    20.verticalSpace,
-                    CustomButton(
-                      titleWidget: model.state == ViewState.busy
-                          ? const CircularProgressIndicator(
-                              color: Color(0xff4530B2),
-                            )
-                          : Text(
-                              'Done',
-                              style: TextStyle(
-                                  color: const Color(0xff4530B2),
-                                  fontWeight: FontWeight.w500,
-                                  fontFamily: 'Poppins',
-                                  fontSize: 20.sp),
-                            ),
-                      onPressed: () {
-                        // if (model.formKey.currentState!.validate()) {
-                        //   // model.createQuiz(title, description);
-                        // }
-                      },
-                    ),
-                    25.verticalSpace,
-                  ],
+                      20.verticalSpace,
+                      CustomButton(
+                        titleWidget: model.state == ViewState.busy
+                            ? const CircularProgressIndicator(
+                                color: Color(0xff4530B2),
+                              )
+                            : Text(
+                                'Done',
+                                style: TextStyle(
+                                    color: const Color(0xff4530B2),
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'Poppins',
+                                    fontSize: 20.sp),
+                              ),
+                        onPressed: () {
+                          // if (model.formKey.currentState!.validate()) {
+                          //   // model.createQuiz(title, description);
+                          // }
+                        },
+                      ),
+                      25.verticalSpace,
+                    ],
+                  ),
                 ),
               ),
             ),
