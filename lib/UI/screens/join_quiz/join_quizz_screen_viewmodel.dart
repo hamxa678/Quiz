@@ -10,13 +10,12 @@ import 'package:get/get.dart';
 import '../../../core/services/firebase_service.dart';
 
 class JoinQuizScreenViewModel extends BaseViewModel {
-  final formKey = GlobalKey<FormState>();
   final firebaseService = locator<FirebaseService>();
   DocumentReference? quizDocumentRefererace;
   QuizModel? quizResponse;
   TextEditingController qcController = TextEditingController();
 
-  getQuizQuestion() async {
+  Future getQuizQuestion() async {
     setState(ViewState.busy);
     quizDocumentRefererace =
         firebaseService.getQuizDocRefererence(qcController.text);
@@ -25,10 +24,19 @@ class JoinQuizScreenViewModel extends BaseViewModel {
       notifyListeners();
     }).whenComplete(() {
       Get.snackbar("Success", 'Quiz joined successfully');
+      print("Title :: ${quizResponse!.title}");
     });
     notifyListeners();
     setState(ViewState.idle);
   }
+
+  // void copyFrom(JoinQuizScreenViewModel other) {
+  //   quizResponse = other.quizResponse;
+  //   // Copy the relevant properties from 'other' to 'this'
+  //   // Example:
+  //   // this.someProperty = other.someProperty;
+  //   // this.anotherProperty = other.anotherProperty;
+  // }
 
   // Future<UserProfile> getUserProfile() async {
   //   await documentReferenceForUser.get().then((value) {

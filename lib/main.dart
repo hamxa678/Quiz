@@ -1,3 +1,4 @@
+import 'package:Quizz/UI/screens/join_quiz/join_quizz_screen_viewmodel.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 // import 'package:firebase_messaging/firebase_messaging.dart';
@@ -7,6 +8,7 @@ import 'package:Quizz/core/others/logger_customizations/custom_logger.dart';
 import 'package:Quizz/firebase_options.dart';
 import 'package:Quizz/locator.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'core/enums/env.dart';
 
 Future<void> main() async {
@@ -36,7 +38,11 @@ Future<void> main() async {
 
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
         .then((_) {
-      runApp(const MyApp(title: 'App Name'));
+      runApp(MultiProvider(providers: [
+        ChangeNotifierProvider<JoinQuizScreenViewModel>(
+          create: (_) => JoinQuizScreenViewModel(),
+        ),
+      ], child: const MyApp(title: 'App Name')));
     });
   } catch (e) {
     log.e("$e");
