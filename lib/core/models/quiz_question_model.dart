@@ -1,9 +1,17 @@
 class QuizQuestionModel {
   String? question;
-  List<Options>? options;
+  List<dynamic>? options;
   int? correctOption;
 
   QuizQuestionModel({this.question, this.options, this.correctOption});
+
+  factory QuizQuestionModel.fromMap(Map<String, dynamic> map) {
+    return QuizQuestionModel(
+      question: map['question'],
+      options: map['options'],
+      correctOption: map['correctOption'],
+    );
+  }
 
   QuizQuestionModel.fromJson(Map<String, dynamic> json) {
     question = json['question'];

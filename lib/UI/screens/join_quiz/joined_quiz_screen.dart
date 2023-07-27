@@ -62,9 +62,12 @@ class JoinedQuizScreen extends StatelessWidget {
                         child: ListView.builder(
                           padding: EdgeInsets.only(bottom: 20.h),
                           shrinkWrap: true,
-                          itemCount: 3,
-                          itemBuilder: (context, index) =>
-                              _question(index + 1, model),
+                          itemCount: model.quizQuestionListResponse!.length,
+                          itemBuilder: (context, index) => _question(
+                              index + 1,
+                              model,
+                              model.quizQuestionListResponse![index].question!,
+                              model.quizQuestionListResponse![index].options!),
                           // {
                           //   if (index < model.quizQuestionList.length) {
                           //     return _question(index + 1, model);
@@ -114,7 +117,8 @@ class JoinedQuizScreen extends StatelessWidget {
         ));
   }
 
-  Widget _question(int questionNumber, JoinQuizScreenViewModel model) {
+  Widget _question(int questionNumber, JoinQuizScreenViewModel model,
+      String question, List<dynamic> options) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -125,7 +129,7 @@ class JoinedQuizScreen extends StatelessWidget {
                 fontFamily: 'Poppins',
                 fontSize: 24.sp)),
         4.verticalSpace,
-        Text('Dear Intern please add code to join Quiz.',
+        Text(question,
             style: TextStyle(
                 color: const Color(0xffFFFFFF),
                 fontWeight: FontWeight.w500,
@@ -142,7 +146,7 @@ class JoinedQuizScreen extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             padding: EdgeInsets.only(bottom: 20.h),
             shrinkWrap: true,
-            itemCount: 3,
+            itemCount: options.length,
             itemBuilder: (context, index) => Container(
                 margin: EdgeInsets.only(top: 20.h),
                 padding: EdgeInsets.fromLTRB(18.w, 17.h, 0, 17.h),
@@ -153,7 +157,7 @@ class JoinedQuizScreen extends StatelessWidget {
                   ),
                   borderRadius: BorderRadius.circular(6.r),
                 ),
-                child: Text('Add Option',
+                child: Text(options[index]['option']!,
                     style: TextStyle(
                         color: const Color(0xffFFFFFF),
                         fontFamily: 'Poppins',
@@ -165,18 +169,27 @@ class JoinedQuizScreen extends StatelessWidget {
   Widget _appBar(JoinQuizScreenViewModel model) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         SvgPicture.asset(
           '${staticIcon}logo1.svg',
+          // width: 24.w,
           fit: BoxFit.scaleDown,
         ),
-        51.horizontalSpace,
-        Text(model.quizResponse!.title!,
-            style: TextStyle(
-                color: const Color(0xffFFFFFF),
-                fontWeight: FontWeight.w600,
-                fontFamily: 'Poppins',
-                fontSize: 22.sp)),
+        // 51.horizontalSpace,
+        SizedBox(
+          width: 200.w,
+          child: Center(
+            child: Text(model.quizResponse!.title!,
+                style: TextStyle(
+                    overflow: TextOverflow.ellipsis,
+                    color: const Color(0xffFFFFFF),
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'Poppins',
+                    fontSize: 22.sp)),
+          ),
+        ),
+        20.horizontalSpace,
       ],
     );
   }
