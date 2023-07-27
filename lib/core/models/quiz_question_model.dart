@@ -2,8 +2,10 @@ class QuizQuestionModel {
   String? question;
   List<dynamic>? options;
   int? correctOption;
+  int? selectedOption;
 
-  QuizQuestionModel({this.question, this.options, this.correctOption});
+  QuizQuestionModel(
+      {this.question, this.options, this.correctOption, this.selectedOption});
 
   factory QuizQuestionModel.fromMap(Map<String, dynamic> map) {
     return QuizQuestionModel(

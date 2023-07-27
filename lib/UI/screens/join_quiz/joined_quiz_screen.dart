@@ -147,21 +147,38 @@ class JoinedQuizScreen extends StatelessWidget {
             padding: EdgeInsets.only(bottom: 20.h),
             shrinkWrap: true,
             itemCount: options.length,
-            itemBuilder: (context, index) => Container(
-                margin: EdgeInsets.only(top: 20.h),
-                padding: EdgeInsets.fromLTRB(18.w, 17.h, 0, 17.h),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: const Color(0xffD9D9D9),
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(6.r),
-                ),
-                child: Text(options[index]['option']!,
-                    style: TextStyle(
-                        color: const Color(0xffFFFFFF),
-                        fontFamily: 'Poppins',
-                        fontSize: 15.sp))))
+            itemBuilder: (context, index) => GestureDetector(
+                  onTap: () {
+                    model.selectOption(questionNumber - 1, index);
+                  },
+                  child: Container(
+                      margin: EdgeInsets.only(top: 20.h),
+                      padding: EdgeInsets.fromLTRB(18.w, 17.h, 0, 17.h),
+                      decoration: BoxDecoration(
+                        color:
+                            model.quizQuestionListResponse![questionNumber - 1]
+                                        .selectedOption ==
+                                    index
+                                ? const Color(0xffD9D9D9)
+                                : null,
+                        border: Border.all(
+                          color: const Color(0xffD9D9D9),
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(6.r),
+                      ),
+                      child: Text(options[index]['option']!,
+                          style: TextStyle(
+                              color: model
+                                          .quizQuestionListResponse![
+                                              questionNumber - 1]
+                                          .selectedOption ==
+                                      index
+                                  ? const Color(0xff4530B2)
+                                  : const Color(0xffFFFFFF),
+                              fontFamily: 'Poppins',
+                              fontSize: 15.sp))),
+                ))
       ],
     );
   }
