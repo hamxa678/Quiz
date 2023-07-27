@@ -38,6 +38,11 @@ class JoinQuizScreenViewModel extends BaseViewModel {
     setState(ViewState.idle);
   }
 
+  selectOption(questionIndex, optionIndex) {
+    quizQuestionListResponse![questionIndex].selectedOption = optionIndex;
+    notifyListeners();
+  }
+
   Future _getQuizQuestions() async {
     // print('Getting questions');
     setState(ViewState.busy);
