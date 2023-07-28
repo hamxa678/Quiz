@@ -179,8 +179,11 @@ class FirebaseService {
   }
 
   DocumentReference getQuizDocRefererence(String quizUID) {
-    
     return _firestore.collection('quizzes').doc(quizUID);
+  }
+
+  DocumentReference getSubmitQuizDocRefererence(String quizUID) {
+    return documentReferenceForUser.collection('submittedQuizzes').doc(quizUID);
   }
 
   deleteQuiz(String quizUID) async {
