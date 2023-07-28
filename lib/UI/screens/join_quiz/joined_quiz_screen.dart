@@ -102,6 +102,7 @@ class JoinedQuizScreen extends StatelessWidget {
                                     fontSize: 20.sp),
                               ),
                         onPressed: () {
+                          model.submitQuiz();
                           // if (model.formKey.currentState!.validate()) {
                           //   // model.createQuiz(title, description);
                           // }

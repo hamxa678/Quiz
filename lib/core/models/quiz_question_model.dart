@@ -33,6 +33,7 @@ class QuizQuestionModel {
       data['options'] = options!.map((v) => v.toJson()).toList();
     }
     data['correctOption'] = correctOption;
+    if (selectedOption != null) data['selectedOption'] = selectedOption;
     return data;
   }
 }
