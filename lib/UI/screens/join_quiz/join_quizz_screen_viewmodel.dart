@@ -61,6 +61,7 @@ class JoinQuizScreenViewModel extends BaseViewModel {
   }
 
   submitQuiz() {
+    setState(ViewState.busy);
     submitQuizDocumentRefererace =
         firebaseService.getSubmitQuizDocRefererence(qcController.text);
     submitQuizDocumentRefererace!.set({
@@ -115,6 +116,7 @@ class JoinQuizScreenViewModel extends BaseViewModel {
 
       Get.snackbar('Success', 'Quiz submitted successfully');
     });
+    setState(ViewState.idle);
   }
 
   int getScore() {
