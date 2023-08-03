@@ -143,11 +143,7 @@ class FirebaseService {
           .doc(quizQuestionList.indexOf(element).toString())
           .set(
             element.toMap(),
-            //       {
-            //   'question': element.question,
-            //   'correctOption': element.correctOption,
-            //   'options': element.options!.map((e) => e.option).toList(),
-            // }
+        
           )
           .whenComplete(() async {
         quizQuestionList.indexOf(element) == quizQuestionList.length - 1

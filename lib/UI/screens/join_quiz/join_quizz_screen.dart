@@ -63,11 +63,6 @@ class JoinQuizScreen extends StatelessWidget {
                       if (_formKey.currentState!.validate()) {
                         await model.getQuizDetail();
 
-                        // Get.to(() => const JoinedQuizScreen());
-                        // Get.to(CreateQuizScreen(
-                        //     title: model.titleController.text,
-                        //     description: model.descriptionController.text)
-                        //     );
                       }
                     },
                     titleWidget: Text('Next',
